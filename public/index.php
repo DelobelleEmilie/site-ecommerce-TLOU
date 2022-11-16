@@ -1,21 +1,21 @@
 <?php
 
 require_once '../vendor/autoload.php';
-require_once '../config/routes.php';
-require_once '../src/router.php';
-require_once '../src/twig.php';
-require_once '../config/config.php';
-require_once '../src/database.php';
 
+$router = new App\Core\Router\Router($_GET['url']);
 
-$twig = initTwig('../template');
-$db = getConnection($config);
+$router->get('/', 'home#show');
+$router->get('/category', 'category#show');
 
-if (gettype($db) == "string") {
-  echo $twig->render('error.html.twig');
-  /* stop l'excution du programme */
-  die();
-}
+$database = new App\Core\Database();
+$DBConnexion = $database->getConnection();
 
-$actionController = initRouter($routes);
-$actionController($twig, $db);
+//if (gettype($DBConnexion) == "string") {
+//    $controller = new \App\Controller\ErrorController($router);
+//    $controller->show($DBConnexion);
+//
+//    /* stop l'exécution du programme */
+//    die();
+//}
+
+$router->run();

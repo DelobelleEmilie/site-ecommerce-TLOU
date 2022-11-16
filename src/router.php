@@ -22,7 +22,7 @@ function initRouter($routes)
                 $route = $routes['error'];
         }
         $controller = ucfirst($route);
-        require_once 'controller/' .$controller.'.php';
+        require_once 'Controller/' .$controller.'.php';
 
         return $controller;
 }
