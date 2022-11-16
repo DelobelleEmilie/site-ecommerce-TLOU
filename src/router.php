@@ -27,11 +27,4 @@ function initRouter($routes)
         return $controller;
 }
 
-function getConnection($config) {
-        try{ 
-                $pdo = new PDO('mysql:host='.$config['dbserver'].';dbname='.$config['dbname'], $config['login'], $config['dbpassword']);
-      }catch (Exception $e) 
-      {
-return $e->getMessage();
-      }
-}
+

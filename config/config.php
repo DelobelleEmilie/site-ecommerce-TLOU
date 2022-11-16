@@ -1,7 +1,8 @@
 <?php
-$config=[
-'dbserver'=>"localhost",
-'dblogin' =>"login8066",
-'dbpassword' =>"rxJCSQIWEHOxpaT",
-'dbname' =>"dblogin8066",
+
+$config = [
+    'dbserver'      => 'localhost',
+    'dblogin'       => 'login8060',
+    'dbpassword'    => 'ozlowUrCCuOTNPU',
+    'dbname'        => 'dblogin8060'
 ];
