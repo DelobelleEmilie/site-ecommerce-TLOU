@@ -1,0 +1,17 @@
+{
+    "name": "login8066/shop",
+    "autoload": {
+        "psr-4": {
+            "Login8066\\Shop\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Emilie Delobelle",
+            "email": "emilie.delobelle@epsi.fr"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.4"
+    }
+}

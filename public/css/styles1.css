@@ -1,0 +1,104 @@
+ /*permet d'importer une police d'écriture' */
+@import url('https://fonts.googleapis.com/css2?family=Arapey&display=swap');
+
+body
+{
+   /*permet de centre le formulaire au milieu de la page */
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    /*permet de metre le background dans une certaine couleur */
+    background-color: grey;
+}
+
+form{
+      /*permet de mettre une marge extérieur de 300px pour la faire descendre de la balise body */
+    margin-top: 300px;
+      /*modifier la couleur du background */
+    background-color: white;
+      /*permet de mettre en place des marges intérieur en haut et en bas de 40px et une marche de gauche et droite de 60px*/
+    padding: 40px 60px;
+      /*permet d'arrondir les bords du formulaire */
+    border-radius: 10px;
+      /*applique une largeur minimale au niveau du formulaire*/
+    min-width: 300px;
+}
+
+form h1{
+      /* modifier la couleur du texte*/
+    color: #eb7371;
+      /*permet de centre le texte */
+    text-align:center;
+  }
+
+  form p.choose-email{
+     /*permet de centre le texte */
+    text-align:center;
+  }
+
+  form .inputs {
+     /*Permet d'empiler les inputs les un sur les autres*/
+    display: flex;
+    flex-direction: column;
+  }
+
+ /*declare les balises inputs en spécifiant les différents types de input */
+  form .inputs input[type='mail'], input[type='password']{
+    /*marge intérieur */
+    padding: 15px;
+     /*permet d'enlever la bordure */
+    border:none;
+     /*permet d'arrondir les bords des inputs*/
+    border-radius: 5px;
+     /*permet de changer la couleur du background */
+    background-color:#f2f2f2;
+     /*permet d'enveler la bordure quand on clique sur le input*/
+    outline:none;
+     /*permet de mettre une marge exterieur entre les deux inputs */
+    margin-bottom: 15px;
+  }
+
+  form p.inscription{
+     /*permet de choisir la taille de la police*/
+    font-size: 14px;
+     /*espace le bouton du texte*/
+    margin-bottom: 20px;
+     /*choisi la couleur de la police*/
+    color: #878787;
+  }
+
+  form p.inscription span{
+    /*choisi la couleur de la police  des mots entoure par la balise*/
+   color: pink;
+ }
+
+form button{
+      /*implique une marge interieur */
+    padding: 15px 25px;
+      /*arrondi la bordure du bouton*/
+    border-radius: 5px;
+      /*masquer la bordule*/
+    border:none;
+      /*modifier la taille de police du texte */
+    font-size: 15px;
+    color: #fff;
+    background-color: #eb7371;
+      /*permet d'annunler la création d'une bordure rouge*/
+    outline:none;
+      /*permet de modifier le ckicker en un pointer*/
+    cursor:pointer;
+  }
+
+  img
+  {
+      /* permet de laisser aucun espace entre le haut de la page et l'image*/
+    position: absolute;
+       /*place l'image plus en haut */
+    top: 3%;
+       /*place l'image plus à droite */
+    left: 45.2%;
+       /*défini la largeur de l'image */
+    width: 200px;
+       /*défini la hauteur de l'image */
+    height: 200px;
+  }

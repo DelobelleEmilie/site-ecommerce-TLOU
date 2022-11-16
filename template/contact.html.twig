@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}
+    Bienvenue sur le Shop !
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+    <h1>Formulaire de contact </h1>
+
+ <fieldset>
+                <legend>Contact</legend>
+                   <input type="text" name="nom" placeholder="Nom">
+                   <br></br>
+                      <input type="text" name="prenom" placeholder="Prénom">
+                      <br></br>
+                <input type="text" name="email" placeholder="Email">
+<br></br>
+                <input type="text" name="télephone" placeholder="télephone">
+                <br></br>
+                 <textarea placeholder="Votre message"></textarea>
+                    <br></br>
+                    <input type="checkbox" id="tnc">
+                    <label for="tnc">J'accepte les CG</label>
+              
+            </fieldset>
+<footer>
+        <p>©2022 Emilie Delobelle</p>
+    </footer>
+    </div>
+{% endblock %}   
