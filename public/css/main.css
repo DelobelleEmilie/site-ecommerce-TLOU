@@ -1,0 +1,11 @@
+:root {
+    --bs-link-color: #000 !important;
+}
+
+a {
+    text-decoration: inherit !important;
+}
+
+a:hover {
+    text-decoration: underline !important;
+}

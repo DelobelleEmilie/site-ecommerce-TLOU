@@ -1,0 +1,15 @@
+{% extends "shared/layout.html.twig" %}
+
+{% block title %}
+    Bienvenue sur le Shop !
+{% endblock %}
+
+{% block content %}
+
+    <div class="container">
+            <img class="mx-auto d-block" src="https://res.cloudinary.com/practicaldev/image/fetch/s--_GqDpWw0--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/i/7aqcppklh6bexoa70320.jpg">
+    </div>
+
+    <div class="alert alert-danger text-center">{{ message | default('Erreur inconnue.') }}</div>
+
+{% endblock %}  

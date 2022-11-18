@@ -1,0 +1,30 @@
+{% extends "shared/resource/list.html.twig" %}
+
+{% block title %}
+    Toutes les catégories de produits
+{% endblock %}
+
+{% block content %}
+
+    <div class="container d-flex gap-5 p-5">
+        {% if categories|length > 0 %}
+            {% for category in categories %}
+                <a href="{{ category.link|e }}">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ category.label|e }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Accéder à la catégorie {{ category.label|e|lower }}.</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                Aucune catégorie disponible.
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

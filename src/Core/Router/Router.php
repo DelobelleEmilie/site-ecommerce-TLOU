@@ -3,9 +3,6 @@
 
 namespace App\Core\Router;
 
-
-use Exception;
-
 class Router
 {
     const ROUTES =  [
@@ -50,7 +47,7 @@ class Router
 
     public function run() {
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
-            throw new Exception('No route matches this method.');
+            throw new RouterException('No route matches this method.');
         }
 
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
@@ -59,12 +56,12 @@ class Router
             }
         }
 
-        throw new Exception('No matching route.');
+        throw new RouterException('No matching route.');
     }
 
     public function url($name, $params = []) {
         if (!isset($this->nameRoutes[$name])) {
-            throw new Exception('No route matches this name.');
+            throw new RouterException('No route matches this name.');
         }
         return $this->nameRoutes[$name]->getUrl($params);
     }
