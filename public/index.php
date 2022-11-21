@@ -2,17 +2,20 @@
 
 require_once '../vendor/autoload.php';
 
+#importe les fichiers
 use App\Controller\ErrorController;
 use App\Core\Router\RouterException;
 use App\Core\Router\Router;
 
 //session_start();
 
+#crée un nouveau Router avec en paramètre la variable url
 $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');
 
-var_dump($_GET['url']);
 
-$router->get('/', function () { echo "<h1>Home</h1>"; });
+
+#fonction router recuper l'url qui affiche la page twig
+$router->get('/', 'home#show');
 //$router->get('/', 'home#show');
 
 // Category
@@ -31,14 +34,19 @@ $router->get('/product/:id', function ($id) { echo "<h1>Produit : $id</h1>"; })-
 $router->get('/product/:id/delete', function ($id) { echo "<h1>Supprime le produit : $id</h1>"; })->with('id', '[1-9][0-9]*');
 //$router->get('/product/:id/delete', 'product#delete')->with('id', '[1-9][0-9]*');
 
-
+  # fonction qui va comparer l'url demandée, et toutes les adresses enregistrées
+    #Pour appeler la bonne action, ou générer une Exception
 try {
+  
     $router->run();
 }
+
+#gérer les exception du router
 catch (RouterException $e) {
     $controller = new ErrorController();
     $controller->router($e->getMessage());
 }
+# gérer le reste
 catch (Exception $e) {
     $controller = new ErrorController();
     $controller->show($e->getMessage());
