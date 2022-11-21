@@ -1,1 +1,32 @@
-{% extends "shared/resource/form.html.twig" %}
+{% extends "shared/layout.html.twig" %}
+
+{% block title %}
+    Bienvenue sur le Shop !
+{% endblock %}
+
+{% block content %}
+<form action="index.php?page=addProduct" method="POST"></form>
+<div class="nb-3">
+<label for="productLabel" class="form-label">Libellé</label>
+<input type="text" class="form-control" id="productLabel" name="productLabel"></intput>
+</div>
+
+<div class="nb-3">
+<label for="productDescription" class="form-label">Description</label>
+<textarea class="form-control" id="productDescription"</textarea>
+<input type="text" class="form-control" id="productLabel" name="productDescription" rows="3"></intput>
+
+<div class="nb-3"></div>
+<label for="productPrice" class="form-label">Prix</label>
+<textarea class="form-control" id="productDescription"</textarea>
+<input type="number" class="form-control" id="productPrice" name="productPrice"></intput>
+
+
+<div class="nb-3"></div>
+<select class="form-select" name="productCategory"></select>
+<option value="18">Carte graphique</option>
+<option value="19">Disque dur</option>
+
+<button type="submit" class="btn btn-primary" name="btnAddProduct">Ajouter</button>
+
+{% endblock %}  

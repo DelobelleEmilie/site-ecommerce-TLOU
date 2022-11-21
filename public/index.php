@@ -16,7 +16,9 @@ $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');
 
 #fonction router recuper l'url qui affiche la page twig
 $router->get('/', 'home#show');
-//$router->get('/', 'home#show');
+
+
+$router->get('/form', 'product#edit');
 
 // Category
 $router->get('/category', function () { echo "<h1>Liste des catégories</h1>"; });

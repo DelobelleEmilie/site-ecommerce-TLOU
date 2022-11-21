@@ -52,7 +52,7 @@ class ProductController extends AbstractResourceController
 
     public function edit()
     {
-        // TODO: Implement edit() method.
+        echo $this->twig->render('product/form.html.twig',[]);
     }
 
     public function delete($id)

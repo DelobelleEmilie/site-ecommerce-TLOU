@@ -17,10 +17,10 @@ class Database
 //    ];
 
     const CONFIG = [
-        'dbserver'      => 'shop-database',
-        'dblogin'       => 'user',
-        'dbpassword'    => 'password',
-        'dbname'        => 'test'
+        'dbserver'      => 'localhost',
+        'dblogin'       => 'login8060',
+        'dbpassword'    => 'ozlowUrCCuOTNPU',
+        'dbname'        => 'shop_product'
     ];
 
     public function getConnection() {
