@@ -19,6 +19,7 @@ $router->get('/', 'home#show');
 
 
 $router->get('/form', 'product#edit');
+$router->post('/form', 'product#edit'); 
 
 // Category
 $router->get('/category', function () { echo "<h1>Liste des catégories</h1>"; });

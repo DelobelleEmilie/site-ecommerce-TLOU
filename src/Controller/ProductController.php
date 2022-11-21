@@ -52,9 +52,11 @@ class ProductController extends AbstractResourceController
 
     public function edit()
     {
+        if (isset($_POST)) {
+            var_dump($_POST);
+        }
         echo $this->twig->render('product/form.html.twig',[]);
     }
-
     public function delete($id)
     {
         $this->repository->delete($id);
