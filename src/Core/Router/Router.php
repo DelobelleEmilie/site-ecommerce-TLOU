@@ -59,23 +59,33 @@ class Router
     }
 
     public function run() {
+        #vérifie si on a des routes qui correspondent à la méthode (POST ou GET) de la demande
+         #Si on ne définit aucune route en POST, et que la demande est en POST,  on lève une routerexception direct
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
             throw new RouterException('No route matches this method.');
-        }
 
+        #Si on trouve, alors on déclenche l'action
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
+        }
+        #Si on a une demande en GET, on parcours toutes les routes en GET, et on cherche une correspondance dans l'url.
             if ($route->match($this->url)) {
+                
+        #on déclenche l'action
                 return $route->call($this);
             }
         }
-
+        #Si même en cherchant bien, on ne trouve pas de correspondance, on lève une routerexception
         throw new RouterException('No matching route.');
     }
 
+    #s'il n'y a rien à l'index $name
+    #
     public function url($name, $params = []) {
         if (!isset($this->nameRoutes[$name])) {
+            #Alors on lève une routerexception
             throw new RouterException('No route matches this name.');
         }
+        #Mais si on trouve, avec on renvoie l'url générée avec les paramètres
         return $this->nameRoutes[$name]->getUrl($params);
     }
 }

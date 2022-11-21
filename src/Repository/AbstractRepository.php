@@ -9,6 +9,9 @@ use App\Core\Database;
 
 abstract class AbstractRepository
 {
+    #attribut de la classe
+    #Et protected, ça veut dire que les enfants y ont aussi accès
+    #les enfants sont tous ce qu'extends de AbstractRepository
     protected $DBConnexion;
 
     public function __construct()
@@ -24,6 +27,8 @@ abstract class AbstractRepository
         }
     }
 
+    # tous les enfant doivent avoir ses fonctions là
+    #Tous les repository doivent avoir find($id), findAll()....
     public abstract function find($id);
 
     public abstract function findAll();

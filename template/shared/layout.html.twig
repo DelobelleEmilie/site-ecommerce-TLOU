@@ -13,13 +13,13 @@
 </head>
 
 <body>
-
+<!--appelle le bloc de navigation -->
 {% include ('shared/navigation.html.twig') %}
-
+<!-- le contenu de la page (avec un message d'erreur par défaut, si personne ne vient le remplacer)-->
 {% block content %}
     <div class="alert alert-info">Cette page est vide</div>
 {% endblock %}
-
+<!--appelle le pied de page -->
 {% include ('shared/footer.html.twig') %}
 
 </body>

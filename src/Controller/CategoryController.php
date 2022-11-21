@@ -43,7 +43,9 @@ class CategoryController extends AbstractResourceController
         #on récupère toutes les catégories depuis la base de données
         $categories = $this->repository->findAll();
 
+        #array_map, c'est une function qui prend 2 paramètres
         $categories = array_map(
+            #tableau qui ajouter un lien (link) à ma catégorie
             function ($category) {
                 $category['link'] = $this->router->url('category#show', ['id' => $category['id']]);
                 return $category;
@@ -51,6 +53,7 @@ class CategoryController extends AbstractResourceController
             $categories
         );
 
+        #envoie toutes les catégories à twig
         echo $this->twig->render(
             'category/list.html.twig',
             [
@@ -64,12 +67,15 @@ class CategoryController extends AbstractResourceController
         // TODO: Implement edit() method.
     }
 
+    #spermet de supprimer une catégorie
     public function delete($id)
     {
         $this->repository->delete($id);
 
+        #sert à rediriger vers /category
+        #génère l'URL
         $listUrl = $this->router->url('category#showList');
-
+        #redirige l'url
         header('Location: ' . $listUrl);
         die();
     }
