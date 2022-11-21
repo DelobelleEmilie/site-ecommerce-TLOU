@@ -25,7 +25,7 @@ class Router
         $this->url = $url;
     }
 
-    
+
     #fonction public qui permet de construit le router
     public function get($path, $callable, $name = null) {
         return $this->add($path, $callable, $name, 'GET');
@@ -44,7 +44,7 @@ class Router
         #enregistre la route
         #$this->routes, c'est l'attribut $routes qu'on a déclaré
         $this->routes[$method][] = $route;
-       
+
         if ($name) {
              # si on a mis un nom à la route, on l'enregistre aussi dans les routes nommées $nameRoutes
             $this->nameRoutes[$name] = $route;
@@ -63,13 +63,13 @@ class Router
          #Si on ne définit aucune route en POST, et que la demande est en POST,  on lève une routerexception direct
         if(!isset($this->routes[$_SERVER['REQUEST_METHOD']])) {
             throw new RouterException('No route matches this method.');
-
+        }
         #Si on trouve, alors on déclenche l'action
         foreach ($this->routes[$_SERVER['REQUEST_METHOD']] as $route) {
-        }
+
         #Si on a une demande en GET, on parcours toutes les routes en GET, et on cherche une correspondance dans l'url.
             if ($route->match($this->url)) {
-                
+
         #on déclenche l'action
                 return $route->call($this);
             }
