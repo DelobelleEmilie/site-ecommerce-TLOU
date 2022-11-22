@@ -5,21 +5,27 @@
         <div class="nb-3">
             <label for="productLabel" class="form-label">Libellé</label>
             <input type="text" class="form-control" id="productLabel" name="productLabel"/>
+            <input type="text" class="form-control" id="label" name="label" value="{{ product.label }}"/>
         </div>
 
         <div class="nb-3">
             <label for="productDescription" class="form-label">Description</label>
             <textarea class="form-control" id="productDescription" rows="3"></textarea>
+             <input type="text" class="form-control" id="productDescription" name="description" value="{{ product.description }}"/>
         </div>
 
         <div class="nb-3">
             <label for="productPrice" class="form-label">Prix</label>
             <input class="form-control" id="productPrice" type="number"/>
+              <input type="text" class="form-control" id="productPrice" name="price" value="{{ product.price }}"/>
+        </div>
         </div>
 
         <div class="nb-3">
             <label for="productCategory" class="form-label">Catégorie</label>
             <select class="form-select" name="productCategory" id="productCategory">
+              <input type="text" class="form-control" id="productCategory" name="category" value="{{ product.category }}"/>
+        </div>
                 <option value="18">Carte graphique</option>
                 <option value="19">Disque dur</option>
             </select>

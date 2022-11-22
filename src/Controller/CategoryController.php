@@ -62,9 +62,29 @@ class CategoryController extends AbstractResourceController
         );
     }
 
-    public function edit()
+    public function edit($id)
     {
-        // TODO: Implement edit() method.
+        // On a des données du formulaire, on enregistre en base
+        if (isset($_POST['btnAddCategory'])) {
+            # Enregistrement des données en base
+            $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
+            # Génération de l'URL pour accéder au produit créé ou modifié
+            $url = $this->router->url('category#show', ['id' => $resultId]);
+            # Redirection vers la page du produit
+            header('Location: ' . $url);
+            die();
+        }
+    
+        // Si pas de données du formulaire, on affiche le formulaire
+        if(isset($id)) { // UPDATE
+            $product = $this->repository->find($id);
+            echo $this->twig->render('product/form.html.twig',[
+                'product' => $product
+            ]);
+        }
+        else { // CREATE
+            echo $this->twig->render('product/form.html.twig',[]);
+        }
     }
 
     #spermet de supprimer une catégorie

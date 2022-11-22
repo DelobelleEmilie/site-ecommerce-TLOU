@@ -48,6 +48,21 @@ class CategoryRepository extends AbstractRepository
 
     public function update($id, $object)
     {
-        // TODO: Implement update() method.
+        $query = null;
+
+        $params = [
+            'idCategory' => $object['category']
+        ];
+
+        if (isset($id)) {
+            $query = $this->DBConnexion->prepare("UPDATE shop_category SET category=category WHERE id=:id");
+            $params['id'] = $id;
+        }
+        else {
+            $query = $this->DBConnexion->prepare("INSERT INTO shop_category (Category) VALUES (:category)
+
+        $query->execute($params);
+
+        return isset($id) ? $id : $this->DBConnexion->lastInsertId();
     }
 }

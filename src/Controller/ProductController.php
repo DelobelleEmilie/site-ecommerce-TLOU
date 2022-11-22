@@ -50,12 +50,32 @@ class ProductController extends AbstractResourceController
         );
     }
 
-    public function edit()
+    #on a des données de formulaire, on demande au repository de sauvegarder l'objet
+    #Je récupère l'id à part, si j'ai pas d'ID je suis dans le cas d'une création, sinon dans le cas d'une mise à jour
+    #on récupère le produit créé, pour après
+    public function edit($id = null)
     {
-        if (isset($_POST)) {
-            var_dump($_POST);
+    // On a des données du formulaire, on enregistre en base
+        if (isset($_POST['btnAddProduct'])) {
+            # Enregistrement des données en base
+            $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
+            # Génération de l'URL pour accéder au produit créé ou modifié
+            $url = $this->router->url('product#show', ['id' => $resultId]);
+            # Redirection vers la page du produit
+            header('Location: ' . $url);
+            die();
         }
-        echo $this->twig->render('product/form.html.twig',[]);
+    
+        // Si pas de données du formulaire, on affiche le formulaire
+        if(isset($id)) { // UPDATE
+            $product = $this->repository->find($id);
+            echo $this->twig->render('product/form.html.twig',[
+                'product' => $product
+            ]);
+        }
+        else { // CREATE
+            echo $this->twig->render('product/form.html.twig',[]);
+        }
     }
     public function delete($id)
     {
@@ -67,3 +87,4 @@ class ProductController extends AbstractResourceController
         die();
     }
 }
+

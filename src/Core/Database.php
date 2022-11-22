@@ -20,7 +20,7 @@ class Database
         'dbserver'      => 'localhost',
         'dblogin'       => 'login8060',
         'dbpassword'    => 'ozlowUrCCuOTNPU',
-        'dbname'        => 'shop_product'
+        'dbname'        => 'dblogin8060'
     ];
 
     public function getConnection() {

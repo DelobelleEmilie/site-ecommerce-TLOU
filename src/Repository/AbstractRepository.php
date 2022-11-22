@@ -40,4 +40,5 @@ abstract class AbstractRepository
     public abstract function delete($id);
 
     public abstract function update($id, $object);
+
 }
