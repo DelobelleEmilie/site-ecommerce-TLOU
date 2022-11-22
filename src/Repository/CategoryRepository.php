@@ -45,24 +45,25 @@ class CategoryRepository extends AbstractRepository
             'id' => $id
         ]);
     }
-
     public function update($id, $object)
     {
         $query = null;
-
+    
         $params = [
-            'idCategory' => $object['category']
+            'label' => $object['label'],
         ];
-
+    
+    
         if (isset($id)) {
-            $query = $this->DBConnexion->prepare("UPDATE shop_category SET category=category WHERE id=:id");
+            $query = $this->DBConnexion->prepare("UPDATE shop_category SET label=:label WHERE id=:id");
             $params['id'] = $id;
         }
         else {
-            $query = $this->DBConnexion->prepare("INSERT INTO shop_category (Category) VALUES (:category)
-
+            $query = $this->DBConnexion->prepare("INSERT INTO shop_category (label) VALUES (:label)");
+        }
+    
         $query->execute($params);
-
+    
         return isset($id) ? $id : $this->DBConnexion->lastInsertId();
     }
 }

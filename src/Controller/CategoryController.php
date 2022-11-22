@@ -57,37 +57,37 @@ class CategoryController extends AbstractResourceController
         echo $this->twig->render(
             'category/list.html.twig',
             [
-                'categories' => $categories
+                'categories' => $categories 
             ]
         );
     }
-
-    public function edit($id)
+    
+    public function edit($id = null)
     {
         // On a des données du formulaire, on enregistre en base
         if (isset($_POST['btnAddCategory'])) {
             # Enregistrement des données en base
             $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
-            # Génération de l'URL pour accéder au produit créé ou modifié
+            # Génération de l'URL pour accéder à la catégorie créée ou modifiée
             $url = $this->router->url('category#show', ['id' => $resultId]);
-            # Redirection vers la page du produit
+            # Redirection vers la page de la catégorie
             header('Location: ' . $url);
             die();
         }
     
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
-            $product = $this->repository->find($id);
-            echo $this->twig->render('product/form.html.twig',[
-                'product' => $product
+            $category = $this->repository->find($id);
+            echo $this->twig->render('category/form.html.twig',[
+                'category' => $category
             ]);
         }
         else { // CREATE
-            echo $this->twig->render('product/form.html.twig',[]);
+            echo $this->twig->render('category/form.html.twig',[]);
         }
     }
 
-    #spermet de supprimer une catégorie
+    #permet de supprimer une catégorie
     public function delete($id)
     {
         $this->repository->delete($id);

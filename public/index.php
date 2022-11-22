@@ -18,16 +18,28 @@ $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');
 $router->get('/', 'home#show');
 
 
+$router->get('/', 'contact#show');
+
 $router->get('/form', 'product#edit');
 $router->post('/form', 'product#edit'); 
 
 // Category
-$router->get('/category', function () { echo "<h1>Liste des catégories</h1>"; });
-//$router->get('/category', 'category#showList');
-$router->get('/category/:id', function ($id) { echo "<h1>Catégorie : $id</h1>"; })->with('id', '[1-9][0-9]*');
-//$router->get('/category/:id', 'category#show')->with('id', '[1-9][0-9]*');
-$router->get('/category/:id/delete', function ($id) { echo "<h1>Supprime la catégorie : $id</h1>"; })->with('id', '[1-9][0-9]*');
-//$router->get('/category/:id/delete', 'category#delete')->with('id', '[1-9][0-9]*');
+# Affiche la liste des category
+$router->get('/category', 'category#showList');
+
+# Affiche le category :id
+$router->get('/category/:id', 'category#show')->with('id', '[1-9][0-9]*');
+
+# Affiche un formulaire vide
+$router->get('/category/create', 'category#edit');
+# Enregistre le nouveau category
+$router->post('/category/create', 'category#edit');
+
+$router->get('/category/:id/edit', 'category#edit')->with('id', '[1-9][0-9]*');
+
+$router->post('/category/:id/edit', 'category#edit')->with('id', '[1-9][0-9]*');
+
+$router->get('/category/:id/delete', 'category#delete')->with('id', '[1-9][0-9]*');
 
 # Affiche la liste des produits
 $router->get('/product', 'product#showList');
