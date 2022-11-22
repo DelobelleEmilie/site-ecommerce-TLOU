@@ -1,0 +1,18 @@
+{% extends "shared/resource/detail.html.twig" %}
+
+{% block title %}
+    Types
+{% endblock %}
+
+{% block content %}
+
+    <div>
+        Catégorie #{{ type.label }}
+        <a href="{{ deleteUrl }}">
+            <button class="btn btn-danger">
+                Supprimer
+            </button>
+        </a>
+    </div>
+
+{% endblock %}

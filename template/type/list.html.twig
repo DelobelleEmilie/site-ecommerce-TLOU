@@ -1,0 +1,30 @@
+{% extends "shared/resource/list.html.twig" %}
+
+{% block title %}
+    Toutes les types de produits
+{% endblock %}
+
+{% block content %}
+
+    <div class="container d-flex gap-5 p-5">
+        {% if products|length > 0 %}
+            {% for type in types %}
+                <a href="{{ type.link|e }}">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ type.label|e }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Accéder au types de produit {{ type.label|e|lower }}.</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                Aucun type de produit disponible.
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

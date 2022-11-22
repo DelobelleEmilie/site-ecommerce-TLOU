@@ -19,6 +19,7 @@ $router->get('/', 'home#show');
 
 
 $router->get('/', 'contact#show');
+$router->get('/contact', 'contact#show');
 
 $router->get('/form', 'product#edit');
 $router->post('/form', 'product#edit'); 
@@ -59,6 +60,24 @@ $router->post('/product/:id/edit', 'product#edit')->with('id', '[1-9][0-9]*');
 
 # Supprime le produit :id
 $router->get('/product/:id/delete', 'product#delete')->with('id', '[1-9][0-9]*');
+
+// Type
+# Affiche la liste des category
+$router->get('/type', 'type#showList');
+
+# Affiche le category :id
+$router->get('/type/:id', 'type#show')->with('id', '[1-9][0-9]*');
+
+# Affiche un formulaire vide
+$router->get('/type/create', 'type#edit');
+# Enregistre le nouveau category
+$router->post('/type/create', 'type#edit');
+
+$router->get('/type/:id/edit', 'type#edit')->with('id', '[1-9][0-9]*');
+
+$router->post('/type/:id/edit', 'type#edit')->with('id', '[1-9][0-9]*');
+
+$router->get('/type/:id/delete', 'type#delete')->with('id', '[1-9][0-9]*');
 
     # fonction qui va comparer l'url demandée, et toutes les adresses enregistrées
     #Pour appeler la bonne action, ou générer une Exception

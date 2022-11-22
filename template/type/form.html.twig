@@ -1,0 +1,19 @@
+{% extends "shared/resource/form.html.twig" %}
+
+{% block content %}
+    <form action="" method="POST">
+
+        <div class="nb-3">
+            <label for="label" class="form-label">Libellé</label>
+            <input type="text" class="form-control" id="label" name="label" value="{{ type.label }}"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="btnSave">
+            {% if category %}
+                Mettre à jour
+            {% else %}
+                Ajouter
+            {% endif %}
+        </button>
+    </form>
+{% endblock %}
