@@ -1,0 +1,16 @@
+{% extends "shared/layout.html.twig" %}
+
+{% block container %}
+    <div class="container">
+        <div>
+            {% block content %}
+                <div class="alert alert-info">Cette page est vide</div>
+            {% endblock %}
+        </div>
+        <div>
+            <a href="{{ addUrl }}">
+                <button type="button" class="btn btn-primary">Ajouter</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

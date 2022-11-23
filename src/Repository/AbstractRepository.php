@@ -29,6 +29,12 @@ abstract class AbstractRepository
 
     # tous les enfant doivent avoir ses fonctions là
     #Tous les repository doivent avoir find($id), findAll()....
+
+    /**
+     * @param $id
+     * @return Object Récupère une entité via son id
+     * @return mixed
+     */
     public abstract function find($id);
 
     public abstract function findAll();

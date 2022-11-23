@@ -8,12 +8,7 @@
 <!-- affiche le nom de la catégorie et un bouton supprimer oui => qui mène vers /category/1/delete
 puis on retombe dans notre CategoryController, sur la fonction delete($id)-->
     <div>
-        Catégorie #{{ category.label }}
-        <a href="{{ deleteUrl }}">
-            <button class="btn btn-danger">
-                Supprimer
-            </button>
-        </a>
+        Catégorie #{{ entity.label }}
     </div>
 
 {% endblock %}

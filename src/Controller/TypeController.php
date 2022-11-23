@@ -16,48 +16,55 @@ class TypeController extends AbstractResourceController
         $this->repository = new TypeRepository();
     }
 
-    #on récupère la catégorie qui correspond à l'id
+    #on récupère le type qui correspond à l'id
     #passe a twig l'ID
     public function show($id)
     {
-        $type = $this->repository->find($id);
+        $entity = $this->repository->find($id);
         
         #demander au router de générer une url
-        #demandes l'URL pour supprimer la catégorie
+        #demandes l'URL pour modifier et supprimer le type
+        $editUrl = $this->router->url('type#edit', [ 'id' => $id ]);
         $deleteUrl = $this->router->url('type#delete', [ 'id' => $id ]);
+        $listUrl = $this->router->url('type#showList');
 
         #afficher du twig
-        #on lui envoie la catégorie et l'URL de suppression en paramètre
+        #on lui envoie le type et les URL de modification et suppression en paramètre
         echo $this->twig->render(
             'type/detail.html.twig',
             [
-                'type' => $type,
+                'entity' => $entity,
+                'listUrl' => $listUrl,
+                'editUrl' => $editUrl,
                 'deleteUrl' => $deleteUrl
             ]
         );
     }
 
- 
+
     public function showList()
     {
         #on récupère toutes les catégories depuis la base de données
-        $categories = $this->repository->findAll();
+        $entities = $this->repository->findAll();
 
         #array_map, c'est une function qui prend 2 paramètres
-        $categories = array_map(
-            #tableau qui ajouter un lien (link) à ma catégorie
-            function ($type) {
-                $category['link'] = $this->router->url('type#show', ['id' => $type['id']]);
-                return $type;
+        $entities = array_map(
+        #tableau qui ajouter un lien (link) à ma catégorie
+            function ($entity) {
+                $entity['link'] = $this->router->url('type#show', ['id' => $entity['id']]);
+                return $entity;
             },
-            $type
+            $entities
         );
+
+        $addUrl = $this->router->url('type#create');
 
         #envoie toutes les catégories à twig
         echo $this->twig->render(
-            'category/list.html.twig',
+            'type/list.html.twig',
             [
-                'type' => $type 
+                'entities' => $entities,
+                'addUrl' => $addUrl
             ]
         );
     }
@@ -65,25 +72,29 @@ class TypeController extends AbstractResourceController
     public function edit($id = null)
     {
         // On a des données du formulaire, on enregistre en base
-        if (isset($_POST['btnAddType'])) {
+        if (isset($_POST['submit'])) {
             # Enregistrement des données en base
             $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
             # Génération de l'URL pour accéder à la catégorie créée ou modifiée
             $url = $this->router->url('type#show', ['id' => $resultId]);
             # Redirection vers la page de la catégorie
-            header('Location: ' . $url);
-            die();
+            $this->redirect($url);
         }
+
+        $listUrl = $this->router->url('type#showList');
     
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
-            $category = $this->repository->find($id);
+            $entity = $this->repository->find($id);
             echo $this->twig->render('type/form.html.twig',[
-                'type' => $type
+                'entity' => $entity,
+                'listUrl' => $listUrl
             ]);
         }
         else { // CREATE
-            echo $this->twig->render('type/form.html.twig',[]);
+            echo $this->twig->render('type/form.html.twig',[
+                'listUrl' => $listUrl
+            ]);
         }
     }
 
@@ -96,7 +107,6 @@ class TypeController extends AbstractResourceController
         #génère l'URL
         $listUrl = $this->router->url('type#showList');
         #redirige l'url
-        header('Location: ' . $listUrl);
-        die();
+        $this->redirect($listUrl);
     }
 }

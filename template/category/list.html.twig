@@ -7,15 +7,15 @@
 {% block content %}
 
     <div class="container d-flex gap-5 p-5">
-        {% if categories|length > 0 %}
-            {% for category in categories %}
-                <a href="{{ category.link|e }}">
+        {% if entities|length > 0 %}
+            {% for entity in entities %}
+                <a href="{{ entity.link|e }}">
                     <div class="card" style="width: 18rem;">
                         <div class="card-header">
-                            <h5 class="card-title">{{ category.label|e }}</h5>
+                            <h5 class="card-title">{{ entity.label|e }}</h5>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Accéder à la catégorie {{ category.label|e|lower }}.</p>
+                            <p class="card-text">Accéder à la catégorie {{ entity.label|e|lower }}.</p>
                         </div>
                     </div>
                 </a>

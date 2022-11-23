@@ -20,18 +20,22 @@ class CategoryController extends AbstractResourceController
     #passe a twig l'ID
     public function show($id)
     {
-        $category = $this->repository->find($id);
+        $entity = $this->repository->find($id);
         
         #demander au router de générer une url
         #demandes l'URL pour supprimer la catégorie
+        $editUrl = $this->router->url('category#edit', [ 'id' => $id ]);
         $deleteUrl = $this->router->url('category#delete', [ 'id' => $id ]);
+        $listUrl = $this->router->url('category#showList');
 
         #afficher du twig
         #on lui envoie la catégorie et l'URL de suppression en paramètre
         echo $this->twig->render(
             'category/detail.html.twig',
             [
-                'category' => $category,
+                'entity' => $entity,
+                'listUrl' => $listUrl,
+                'editUrl' => $editUrl,
                 'deleteUrl' => $deleteUrl
             ]
         );
@@ -41,49 +45,56 @@ class CategoryController extends AbstractResourceController
     public function showList()
     {
         #on récupère toutes les catégories depuis la base de données
-        $categories = $this->repository->findAll();
+        $entities = $this->repository->findAll();
 
         #array_map, c'est une function qui prend 2 paramètres
-        $categories = array_map(
+        $entities = array_map(
             #tableau qui ajouter un lien (link) à ma catégorie
-            function ($category) {
-                $category['link'] = $this->router->url('category#show', ['id' => $category['id']]);
-                return $category;
+            function ($entity) {
+                $entity['link'] = $this->router->url('category#show', ['id' => $entity['id']]);
+                return $entity;
             },
-            $categories
+            $entities
         );
+
+        $addUrl = $this->router->url('category#create');
 
         #envoie toutes les catégories à twig
         echo $this->twig->render(
             'category/list.html.twig',
             [
-                'categories' => $categories 
+                'entities' => $entities,
+                'addUrl' => $addUrl
             ]
         );
     }
-    
+
     public function edit($id = null)
     {
         // On a des données du formulaire, on enregistre en base
-        if (isset($_POST['btnAddCategory'])) {
+        if (isset($_POST['submit'])) {
             # Enregistrement des données en base
             $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
             # Génération de l'URL pour accéder à la catégorie créée ou modifiée
             $url = $this->router->url('category#show', ['id' => $resultId]);
             # Redirection vers la page de la catégorie
-            header('Location: ' . $url);
-            die();
+            $this->redirect($url);
         }
-    
+
+        $listUrl = $this->router->url('category#showList');
+
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
-            $category = $this->repository->find($id);
+            $entity = $this->repository->find($id);
             echo $this->twig->render('category/form.html.twig',[
-                'category' => $category
+                'entity' => $entity,
+                'listUrl' => $listUrl
             ]);
         }
         else { // CREATE
-            echo $this->twig->render('category/form.html.twig',[]);
+            echo $this->twig->render('category/form.html.twig',[
+                'listUrl' => $listUrl
+            ]);
         }
     }
 
@@ -96,7 +107,6 @@ class CategoryController extends AbstractResourceController
         #génère l'URL
         $listUrl = $this->router->url('category#showList');
         #redirige l'url
-        header('Location: ' . $listUrl);
-        die();
+        $this->redirect($listUrl);
     }
 }

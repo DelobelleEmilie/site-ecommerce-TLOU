@@ -5,11 +5,11 @@
 
         <div class="nb-3">
             <label for="label" class="form-label">Libellé</label>
-            <input type="text" class="form-control" id="label" name="label" value="{{ type.label }}"/>
+            <input type="text" class="form-control" id="label" name="label" value="{{ entity.label }}"/>
         </div>
 
-        <button type="submit" class="btn btn-primary" name="btnSave">
-            {% if category %}
+        <button type="submit" class="btn btn-primary" name="submit">
+            {% if entity %}
                 Mettre à jour
             {% else %}
                 Ajouter

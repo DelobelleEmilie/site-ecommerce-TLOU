@@ -3,6 +3,8 @@
 
 namespace App\Controller;
 
+use App\Repository\CategoryRepository;
+use App\Repository\TypeRepository;
 use App\Repository\ProductRepository;
 
 class ProductController extends AbstractResourceController
@@ -17,14 +19,18 @@ class ProductController extends AbstractResourceController
 
     public function show($id)
     {
-        $product = $this->repository->find($id);
+        $entity = $this->repository->find($id);
 
+        $editUrl = $this->router->url('product#edit', [ 'id' => $id ]);
         $deleteUrl = $this->router->url('product#delete', [ 'id' => $id ]);
+        $listUrl = $this->router->url('product#showList');
 
         echo $this->twig->render(
             'product/detail.html.twig',
             [
-                'product' => $product,
+                'entity' => $entity,
+                'listUrl' => $listUrl,
+                'editUrl' => $editUrl,
                 'deleteUrl' => $deleteUrl
             ]
         );
@@ -32,20 +38,23 @@ class ProductController extends AbstractResourceController
 
     public function showList()
     {
-        $products = $this->repository->findAll();
+        $entities = $this->repository->findAll();
 
-        $products = array_map(
-            function ($product) {
-                $product['link'] = $this->router->url('product#show', ['id' => $product['id']]);
-                return $product;
+        $entities = array_map(
+            function ($entity) {
+                $entity['link'] = $this->router->url('product#show', ['id' => $entity['id']]);
+                return $entity;
             },
-            $products
+            $entities
         );
+
+        $addUrl = $this->router->url('product#create');
 
         echo $this->twig->render(
             'product/list.html.twig',
             [
-                'products' => $products
+                'entities' => $entities,
+                'addUrl' => $addUrl
             ]
         );
     }
@@ -56,25 +65,39 @@ class ProductController extends AbstractResourceController
     public function edit($id = null)
     {
     // On a des données du formulaire, on enregistre en base
-        if (isset($_POST['btnAddProduct'])) {
+        if (isset($_POST['submit'])) {
             # Enregistrement des données en base
             $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
             # Génération de l'URL pour accéder au produit créé ou modifié
             $url = $this->router->url('product#show', ['id' => $resultId]);
             # Redirection vers la page du produit
-            header('Location: ' . $url);
-            die();
+            $this->redirect($url);
         }
-    
+
+        $listUrl = $this->router->url('product#showList');
+
+        $categoryRepository = new CategoryRepository();
+        $categories = $categoryRepository->findAll();
+
+        $typeRepository = new TypeRepository();
+        $types = $typeRepository->findAll();
+
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
-            $product = $this->repository->find($id);
+            $entity = $this->repository->find($id);
             echo $this->twig->render('product/form.html.twig',[
-                'product' => $product
+                'entity' => $entity,
+                'categories' => $categories,
+                'types' => $types,
+                'listUrl' => $listUrl
             ]);
         }
         else { // CREATE
-            echo $this->twig->render('product/form.html.twig',[]);
+            echo $this->twig->render('product/form.html.twig',[
+                'categories' => $categories,
+                'types' => $types,
+                'listUrl' => $listUrl
+            ]);
         }
     }
     public function delete($id)
@@ -83,8 +106,7 @@ class ProductController extends AbstractResourceController
 
         $listUrl = $this->router->url('product#showList');
 
-        header('Location: ' . $listUrl);
-        die();
+        $this->redirect($listUrl);
     }
 }
 

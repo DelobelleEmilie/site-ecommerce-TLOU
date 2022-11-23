@@ -7,15 +7,15 @@
 {% block content %}
 
     <div class="container d-flex gap-5 p-5">
-        {% if products|length > 0 %}
-            {% for type in types %}
-                <a href="{{ type.link|e }}">
+        {% if entities|length > 0 %}
+            {% for entity in entities %}
+                <a href="{{ entity.link|e }}">
                     <div class="card" style="width: 18rem;">
                         <div class="card-header">
-                            <h5 class="card-title">{{ type.label|e }}</h5>
+                            <h5 class="card-title">{{ entity.label|e }}</h5>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">Accéder au types de produit {{ type.label|e|lower }}.</p>
+                            <p class="card-text">Accéder au types de produit {{ entity.label|e|lower }}.</p>
                         </div>
                     </div>
                 </a>

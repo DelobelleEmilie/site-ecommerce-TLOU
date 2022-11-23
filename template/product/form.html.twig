@@ -1,36 +1,47 @@
-{% extends "shared/layout.html.twig" %}
+{% extends "shared/resource/form.html.twig" %}
+
 {% block content %}
     <form action="" method="POST">
 
         <div class="nb-3">
-            <label for="productLabel" class="form-label">Libellé</label>
-            <input type="text" class="form-control" id="productLabel" name="productLabel"/>
-            <input type="text" class="form-control" id="label" name="label" value="{{ product.label }}"/>
+            <label for="label" class="form-label">Libellé</label>
+            <input type="text" class="form-control" id="label" name="label" value="{{ entity.label }}"/>
         </div>
 
         <div class="nb-3">
-            <label for="productDescription" class="form-label">Description</label>
-            <textarea class="form-control" id="productDescription" rows="3"></textarea>
-             <input type="text" class="form-control" id="productDescription" name="description" value="{{ product.description }}"/>
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3">{{ entity.description }}</textarea>
         </div>
 
         <div class="nb-3">
-            <label for="productPrice" class="form-label">Prix</label>
-            <input class="form-control" id="productPrice" type="number"/>
-              <input type="text" class="form-control" id="productPrice" name="price" value="{{ product.price }}"/>
-        </div>
+            <label for="price" class="form-label">Prix</label>
+            <input type="text" class="form-control" id="price" name="price" value="{{ entity.price }}"/>
         </div>
 
         <div class="nb-3">
-            <label for="productCategory" class="form-label">Catégorie</label>
-            <select class="form-select" name="productCategory" id="productCategory">
-              <input type="text" class="form-control" id="productCategory" name="category" value="{{ product.category }}"/>
-        </div>
-                <option value="18">Carte graphique</option>
-                <option value="19">Disque dur</option>
+            <label for="category" class="form-label">Catégorie</label>
+            <select class="form-select" name="category" id="category">
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == entity.idCategory %} selected {% endif %}>{{ category.label }}</option>
+                {% endfor %}
             </select>
         </div>
 
-        <button type="submit" class="btn btn-primary" name="btnAddProduct">Ajouter</button>
+        <div class="nb-3">
+            <label for="type" class="form-label">Catégorie</label>
+            <select class="form-select" name="type" id="category">
+                {% for type in types %}
+                    <option value="{{ type.id }}" {% if type.id == entity.idType %} selected {% endif %}>{{ type.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="submit">
+            {% if product %}
+                Mettre à jour
+            {% else %}
+                Ajouter
+            {% endif %}
+        </button>
     </form>
 {% endblock %}

@@ -7,12 +7,15 @@
 {% block content %}
 
     <div>
-        Produit #{{ product.label }}
-        <a href="{{ deleteUrl }}">
-            <button class="btn btn-danger">
-                Supprimer
-            </button>
-        </a>
+        <div>
+            Label : {{ entity.label }}
+        </div>
+        <div>
+            Description : {{ entity.description }}
+        </div>
+        <div>
+            Prix : {{ entity.price }} €
+        </div>
     </div>
 
 {% endblock %}

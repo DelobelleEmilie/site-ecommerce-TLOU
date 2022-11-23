@@ -21,4 +21,9 @@ abstract class AbstractController {
         $loader = new FilesystemLoader('../template');
         $this->twig = new Environment($loader, []);
     }
+
+    protected function redirect($to) {
+        header('Location: ' . $to);
+        die();
+    }
 }
