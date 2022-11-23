@@ -19,6 +19,11 @@ $router->get('/', 'home#show');
 
 $router->get('/contact', 'contact#show');
 
+$router->get('/connexion',connexion#show);
+$router->post('/connexion',connexion#show);
+
+
+
 // Category
 # Affiche la liste des category
 $router->get('/category', 'category#showList');

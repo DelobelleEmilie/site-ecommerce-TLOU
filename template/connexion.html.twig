@@ -1,0 +1,25 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Authentification
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<p><img src="logo.png"></p>
+		<form action="?page=pageConnexion" method="post">
+			<h1>Se connecter</h1>
+
+			<div class="inputs">
+
+				<!--créer une interaction pour le  email et ajouter la donnée mail -->
+				<input type="mail" placeholder="Email" name="pseudo">
+
+				<!--créer une interaction pour le password  et ajouter la donnée password -->
+				<input type="password" placeholder="Password" name="mdp">
+			</div>
+			<!--créer un bouton pour se connecter-->
+			<button type="submit" name="Submitted">Se connecter</button>
+            <p> si je n'est pas de compte en créer</p> <button type="submit" name="Submitted">S'inscrire</button>
+		</form>
+	</div>
+{% endblock %}
