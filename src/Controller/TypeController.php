@@ -3,7 +3,7 @@
 
 namespace App\Controller;
 
-use App\Repository\CategoryRepository;
+use App\Repository\TypeRepository;
 
 class TypeController extends AbstractResourceController
 {
@@ -31,7 +31,7 @@ class TypeController extends AbstractResourceController
         echo $this->twig->render(
             'type/detail.html.twig',
             [
-                'category' => $type,
+                'type' => $type,
                 'deleteUrl' => $deleteUrl
             ]
         );
