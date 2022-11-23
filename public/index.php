@@ -19,8 +19,11 @@ $router->get('/', 'home#show');
 
 $router->get('/contact', 'contact#show');
 
-$router->get('/connexion',connexion#show);
-$router->post('/connexion',connexion#show);
+$router->get('/connexion','connexion#show');
+$router->post('/connexion','connexion#show');
+
+$router->get('/inscription','inscription#show');
+$router->post('/inscription','inscription#show');
 
 
 
