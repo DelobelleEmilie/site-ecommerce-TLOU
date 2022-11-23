@@ -8,6 +8,6 @@ class HomeController extends AbstractController
   #show() qui est publique = n'importe qui peut l'appeler
   # la fonction, elle affiche la page twig home.html.twig
   public function show() {
-    echo $this->twig->render('home.html.twig', []);
+      $this->render('home.html.twig', []);
   }
 }

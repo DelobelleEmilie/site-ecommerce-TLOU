@@ -7,7 +7,7 @@ use App\Repository\CategoryRepository;
 
 class CategoryController extends AbstractResourceController
 {
-    private $repository;
+    private CategoryRepository $repository;
 
     #c'est le constructeur, c'est là qu'on récupère le repository
     public function __construct($router)
@@ -24,13 +24,13 @@ class CategoryController extends AbstractResourceController
         
         #demander au router de générer une url
         #demandes l'URL pour supprimer la catégorie
-        $editUrl = $this->router->url('category#edit', [ 'id' => $id ]);
-        $deleteUrl = $this->router->url('category#delete', [ 'id' => $id ]);
-        $listUrl = $this->router->url('category#showList');
+        $editUrl = $this->url('category#edit', [ 'id' => $id ]);
+        $deleteUrl = $this->url('category#delete', [ 'id' => $id ]);
+        $listUrl = $this->url('category#showList');
 
         #afficher du twig
         #on lui envoie la catégorie et l'URL de suppression en paramètre
-        echo $this->twig->render(
+        $this->render(
             'category/detail.html.twig',
             [
                 'entity' => $entity,
@@ -51,16 +51,16 @@ class CategoryController extends AbstractResourceController
         $entities = array_map(
             #tableau qui ajouter un lien (link) à ma catégorie
             function ($entity) {
-                $entity['link'] = $this->router->url('category#show', ['id' => $entity['id']]);
+                $entity['link'] = $this->url('category#show', ['id' => $entity['id']]);
                 return $entity;
             },
             $entities
         );
 
-        $addUrl = $this->router->url('category#create');
+        $addUrl = $this->url('category#create');
 
         #envoie toutes les catégories à twig
-        echo $this->twig->render(
+        $this->render(
             'category/list.html.twig',
             [
                 'entities' => $entities,
@@ -76,23 +76,23 @@ class CategoryController extends AbstractResourceController
             # Enregistrement des données en base
             $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
             # Génération de l'URL pour accéder à la catégorie créée ou modifiée
-            $url = $this->router->url('category#show', ['id' => $resultId]);
+            $url = $this->url('category#show', ['id' => $resultId]);
             # Redirection vers la page de la catégorie
             $this->redirect($url);
         }
 
-        $listUrl = $this->router->url('category#showList');
+        $listUrl = $this->url('category#showList');
 
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
             $entity = $this->repository->find($id);
-            echo $this->twig->render('category/form.html.twig',[
+            $this->render('category/form.html.twig',[
                 'entity' => $entity,
                 'listUrl' => $listUrl
             ]);
         }
         else { // CREATE
-            echo $this->twig->render('category/form.html.twig',[
+            $this->render('category/form.html.twig',[
                 'listUrl' => $listUrl
             ]);
         }
@@ -105,7 +105,7 @@ class CategoryController extends AbstractResourceController
 
         #sert à rediriger vers /category
         #génère l'URL
-        $listUrl = $this->router->url('category#showList');
+        $listUrl = $this->url('category#showList');
         #redirige l'url
         $this->redirect($listUrl);
     }

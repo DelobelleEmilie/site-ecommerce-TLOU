@@ -7,20 +7,13 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a href="/category" class="nav-link">Catégories</a></li>
-                <li class="nav-item"><a href="/product" class="nav-link">Produits</a></li>
-                <li class="nav-item"><a href="/goodies" class="nav-link">Goodies</a></li>
-                <li class="nav-item"><a href="/jeux" class="nav-link">Jeux</a></li>
-                <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+                {% for key,value in navigation %}
+                    <li class="nav-item"><a href="{{ value }}" class="nav-link">{{ key }}</a></li>
+                {% endfor %}
             </ul>
-            <div>
-            <button class="pull-left btn text-secondary"><a href="/panier" class="nav-link"><i class="bi bi-sign-intersection"></i>panier</a> 
-                <button class="pull-left btn text-secondary"><a href="/connexion" class="nav-link"><i class="bi bi-person-add"></i>connexion</a></button>
-                
-            </div>
+             <button class=pull-left><a href="/connexion" class="nav-link">Connexion</a></button>
         </div>
     </div>
 </nav>
 
 
- 

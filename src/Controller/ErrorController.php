@@ -11,7 +11,7 @@ class ErrorController extends AbstractController
 
     // Erreur standard / par défaut
     function show($message = null) {
-        echo $this->twig->render(
+        $this->render(
             'error/error.html.twig',
             isset($message) ? ['message' => $message] : []
         );
@@ -19,7 +19,7 @@ class ErrorController extends AbstractController
 
     // Erreur provenant du router (page non trouvée, méthode non autorisée...)
     function router($message = null) {
-        echo $this->twig->render(
+        $this->render(
             'error/router.html.twig',
             ['message' => isset($message) ? $message : null]
         );

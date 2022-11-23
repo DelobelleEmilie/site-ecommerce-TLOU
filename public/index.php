@@ -19,12 +19,11 @@ $router->get('/', 'home#show');
 
 $router->get('/contact', 'contact#show');
 
-$router->get('/connexion','connexion#show');
-$router->post('/connexion','connexion#show');
-
-$router->get('/inscription','inscription#show');
-$router->post('/inscription','inscription#show');
-
+// User
+$router->get('/connexion','user#login');
+$router->post('/connexion','user#login');
+$router->get('/inscription','user#register');
+$router->post('/inscription','user#register');
 
 
 // Category

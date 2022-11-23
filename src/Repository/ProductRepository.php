@@ -8,7 +8,13 @@ class ProductRepository extends AbstractRepository
 {
     public function find($id)
     {
-        $query = $this->DBConnexion->prepare("SELECT id, label, description, price, idCategory, idType FROM shop_product WHERE id = :id");
+        $query = $this->DBConnexion->prepare(
+            "SELECT sp.id, sp.label, sp.description, sp.price, sp.idCategory, sp.idType, sc.label as category, st.label as type 
+                    FROM shop_product as sp 
+                    LEFT JOIN shop_category sc on sp.idCategory = sc.id 
+                    LEFT JOIN shop_type st on sp.idType = st.id 
+                    WHERE sp.id = :id"
+        );
         $query->execute([
             'id' => $id
         ]);
