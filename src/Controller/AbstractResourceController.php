@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Core\Router\Router;
+
 abstract class AbstractResourceController extends AbstractController {
 
     abstract public function show($id);

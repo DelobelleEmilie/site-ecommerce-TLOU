@@ -1,0 +1,27 @@
+{% extends "shared/resource/detail.html.twig" %}
+
+{% block title %}
+    Produit
+{% endblock %}
+
+{% block content %}
+
+    <div>
+        <div>
+            Prénom : {{ entity.prénom }}
+        </div>
+        <div>
+            Nom : {{ entity.nom }}
+        </div>
+        <div>
+            Date de naissance : {{ entity.date_naissance|date }}
+        </div>
+        <div>
+            Roles : {{ entity.role }}
+        </div>
+        <div>
+            Téléphone : {{ entity.télephone }}
+        </div>
+    </div>
+
+{% endblock %}

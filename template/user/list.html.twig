@@ -1,0 +1,30 @@
+{% extends "shared/resource/list.html.twig" %}
+
+{% block title %}
+    Toutes les produits
+{% endblock %}
+
+{% block content %}
+
+    <div class="container d-flex gap-5 p-5">
+        {% if entities|length > 0 %}
+            {% for entity in entities %}
+                <a href="{{ entity.link|e }}">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ entity.prénom|e }} {{ entity.nom|e }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Accéder à l'utilisateur {{ entity.prénom|e|lower }}.</p>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        {% else %}
+            <div class="alert alert-info">
+                Aucun utilisateur enregistré.
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

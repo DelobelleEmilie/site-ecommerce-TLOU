@@ -10,10 +10,10 @@ use Twig\Loader\FilesystemLoader;
 
 abstract class AbstractController {
 
-    private Router $router;
+    private ?Router $router;
     private Environment $twig;
 
-    public function __construct(Router $router)
+    public function __construct(?Router $router = null)
     {
         // Tous les controllers ont accès au router
         $this->router = $router;
@@ -47,6 +47,7 @@ abstract class AbstractController {
     }
 
     protected function url(string $name, array $params = []) {
+        if (!isset($this->router)) { return null; }
         try {
             return $this->router->url($name, $params);
         }
