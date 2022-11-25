@@ -7,7 +7,7 @@ use App\Controller\ErrorController;
 use App\Core\Router\RouterException;
 use App\Core\Router\Router;
 
-//session_start();
+session_start();
 
 #crée un nouveau Router avec en paramètre la variable url
 $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');

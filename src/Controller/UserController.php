@@ -24,9 +24,11 @@ class UserController extends AbstractResourceController
         {
             $email = $_POST['email'];
             $password = $_POST['username'];
+    
+            $user = $this->repository->verify($email, $password);
         }
-
-        $this->render('user/homeconnexion.html.twig', []);
+    
+        $this->render('user/connexion.html.twig', []);
     }
 
     public function register()
