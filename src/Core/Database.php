@@ -9,19 +9,11 @@ use PDO;
 
 class Database
 {
-//    const CONFIG = [
-//        'dbserver'      => 'localhost',
-//        'dblogin'       => 'login8060',
-//        'dbpassword'    => 'ozlowUrCCuOTNPU',
-//        'dbname'        => 'dblogin8060'
-//    ];
-
-    const CONFIG = [
-        'dbserver'      => 'shop-database',
-        'dblogin'       => 'user',
-        'dbpassword'    => 'password',
-        'dbname'        => 'test'
-    ];
+   const CONFIG = [
+     'dbserver'      => 'localhost',
+      'dblogin'       => 'login8060',
+     'dbpassword'    => 'ozlowUrCCuOTNPU',
+        'dbname'        => 'dblogin8060' ];
 
     public function getConnection() {
         try{
