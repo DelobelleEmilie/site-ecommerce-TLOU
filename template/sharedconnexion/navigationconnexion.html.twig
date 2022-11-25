@@ -1,0 +1,27 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">Shop</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
+                aria-expanded="false" aria-label="toggle Navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+            <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{entity.name}} {{entity.prénom}}
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li><a class="dropdown-item" href="/adresse">Adresses</a></li>
+            <li><a class="dropdown-item" href="/payement">Moyens de payements</a></li>
+            <li><a class="dropdown-item" href="/compte">Mon compte</a></li>
+          </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% for key,value in navigation %}
+                    <li class="nav-item"><a href="{{ value }}" class="nav-link">{{ key }}</a></li>
+                {% endfor %}
+            </ul>
+            
+        </div>
+    </div>
+</nav>

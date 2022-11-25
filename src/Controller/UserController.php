@@ -26,7 +26,7 @@ class UserController extends AbstractResourceController
             $password = $_POST['username'];
         }
 
-        $this->render('user/connexion.html.twig', []);
+        $this->render('user/homeconnexion.html.twig', []);
     }
 
     public function register()
