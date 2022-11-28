@@ -1,0 +1,74 @@
+{% extends "shared/layout.html.twig" %}
+
+{% block title %}
+    Bienvenue dans votre panier {{entity.name}} {{entity.prénom}}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+<div class="card mb-3">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://media.ccmbg.com/tc/4881385133/929330/1637230514" class="img-fluid rounded-start" alt="">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">Nom du produit {{entity.name_product}}</h5>
+        <p class="card-text">Type de produit </p>  
+        <div class="mb-4 pb-2">
+           <p>Quantité demandai</p>  
+                    <select class="select">
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                    <option value="4">4</option>
+                    </select>
+                  </div>
+        <p>Le prix est de {{entity.price}}</p>
+        <button type="button" class="btn btn-dark">Supprimer l'article du panier</button>
+
+      </div>
+    </div>
+  </div>
+</div>
+  <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                      <a href="#!" class="text-muted"><i class="fas fa-times"></i></a>
+                    </div>
+                  </div>
+
+                  <hr class="my-4">
+
+                  <div class="pt-5">
+                    <h6 class="mb-0"><a href="#!" class="text-body"><i
+                          class="fas fa-long-arrow-alt-left me-2"></i>Retour sur la page d'accueil</a></h6>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4 bg-grey">
+                <div class="p-5">
+                  <h3 class="fw-bold mb-5 mt-2 pt-1">Payement</h3>
+                  <hr class="my-4">
+
+                  <div class="d-flex justify-content-between mb-4">
+                    <h5 class="text-uppercase">Nombres d'items {{entity.number_items}}</h5>
+                    <h5>Prix à payer : {{entity.price}}</h5>
+                  </div>
+
+                  <h5 class="text-uppercase mb-3">Frais de livraison</h5>
+
+                  <div class="mb-4 pb-2">
+                    <select class="select">
+                      <option value="1">Livraison standard en 2-3 jours: €5.00</option>
+                      <option value="2">Livraison en point relais :€0.00 </option>
+                      <option value="3">Livraison en 1 jour : €15.00</option>
+                    </select>
+                  </div>
+
+            
+               <button class="btn btn-dark btn-block btn-lg"
+                    data-mdb-ripple-color="dark">Payer<a href="/connexion" class="nav-link"></button>
+        </div>
+
+                </div>
+                </div>
+{% endblock %}

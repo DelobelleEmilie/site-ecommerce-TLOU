@@ -4,22 +4,38 @@
 {% endblock %}
 
 {% block content %}
-	<div class="container">
-		<p><img alt="logo" src="../../public/index.php"></p>
-		<form action="" method="post">
-			<h1>Se connecter</h1>
 
+	
+		<div class="text-center">
+		<p><img alt="logo" src="https://upload.wikimedia.org/wikipedia/commons/6/67/The_Last_of_Us_Logo_2.png"></p>
+		</div>
+		<form action="" method="post">
+			<div class="text-center">
+			<h1>Se connecter</h1>
+			</div>
+			<div class="container">
 			<div class="inputs">
+			<div class="text-center">
+<div class="bg-dark" >
+<span class="border border-dark">
 
 				<!--créer une interaction pour le  email et ajouter la donnée mail -->
-				<input type="email" placeholder="Email" name="email"/>
-
+				<input  type="email" placeholder="Email" name="email"/>
+			<p></p>
 				<!--créer une interaction pour le password  et ajouter la donnée password -->
 				<input type="password" placeholder="Password" name="password"/>
+				<br></br>
+		
+	<div class="d-grid gap-2 col-1 mx-auto" >
+  <button class="btn btn-primary" type="button">Connexion</button>
+</div>
+<div class="text-center">
+<div class= " text-decoration:none"</div>
+            <p>Si je n'est pas de compte <a href="http://site-ecommerce-the-last-of-us/inscription">créer un compte</a></p>
 			</div>
-			<!--créer un bouton pour se connecter-->
-			<button type="submit" name="Submitted">Se connecter</button>
-            <p> si je n'est pas de compte en créer</p> <button><a href="/inscription" class="nav-link">inscription</a></button>
+			</span>
 		</form>
+	</div>
+	</div>
 	</div>
 {% endblock %}

@@ -16,6 +16,9 @@ $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');
 $router->get('/', 'home#show');
 $router->get('/contact', 'contact#show');
 
+$router->get('/', 'panier#show');
+$router->get('/panier', 'panier#show');
+
 #region user
 $router->get('/connexion','user#login');
 $router->post('/connexion','user#login');
