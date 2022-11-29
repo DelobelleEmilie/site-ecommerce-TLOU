@@ -5,6 +5,7 @@ namespace App\Controller;
 
 
 use App\Core\Router\Router;
+use App\Core\Security\AuthenticationManager;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -12,6 +13,7 @@ abstract class AbstractController {
 
     private ?Router $router;
     private Environment $twig;
+    protected AuthenticationManager $authManager;
 
     public function __construct(?Router $router = null)
     {
@@ -21,6 +23,8 @@ abstract class AbstractController {
         // Tous les controllers ont accès à twig
         $loader = new FilesystemLoader('../template');
         $this->twig = new Environment($loader, []);
+
+        $this->authManager = new AuthenticationManager();
     }
 
     protected function render(string $page, ?array $params) {
@@ -35,7 +39,8 @@ abstract class AbstractController {
         # Ajout de la navigation à tous les pages
         $params = array_merge($params, ['navigation' => $navigation]);
 
-        $user = $_SESSION['user'];
+        $user = $this->authManager->getUser();
+
         if (isset($user))
         {
             $params['user'] = $user;

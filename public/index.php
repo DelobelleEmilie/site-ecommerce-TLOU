@@ -14,6 +14,7 @@ $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');
 
 #fonction router recuper l'url qui affiche la page twig
 $router->get('/', 'home#show');
+
 $router->get('/contact', 'contact#show');
 
 $router->get('/', 'messageenvoie#show');

@@ -65,7 +65,7 @@ class Route {
     #On prend le chemin de la route
 
     public function getUrl($params) {
-        $path = "/" . $this->path;
+        $path = '/' . $this->path;
         foreach ($params as $k => $v) {
             #on remplace les paramètres par des vraies valeurs"
             $path = str_replace(":$k", $v, $path);

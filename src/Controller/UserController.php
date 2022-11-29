@@ -28,7 +28,7 @@ class UserController extends AbstractResourceController
             $user = $this->repository->verify($email, $password);
 
             if (isset($user)) {
-                $_SESSION['user'] = $user;
+                $this->authManager->setUser($user);
                 $url = $this->url('home#show');
                 $this->redirect($url);
             }
