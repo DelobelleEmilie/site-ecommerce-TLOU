@@ -71,14 +71,21 @@ class UserRepository extends AbstractRepository
     }
 public function verify($email, $password)
 {
-    $query = $this->DBConnexion->prepare("SELECT mail, mot_passe FROM shop_user WHERE mail=:email");
+    $query = $this->DBConnexion->prepare("SELECT mail, mot_passe, prénom, nom, role FROM shop_user WHERE mail=:email");
     $query->execute([
         'email' => $email
     ]);
     $user = $query->fetch();
+
+    if (!isset($user))
+    {
+        return null;
+    }
+
     if ($user['mot_passe'] == $password) {
         return $user;
     }
+
     return null;
 }
 }

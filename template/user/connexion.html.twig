@@ -4,37 +4,30 @@
 {% endblock %}
 
 {% block content %}
-<center>
-<div class="card" style="width: 50rem;">
-<div class=".border .rounded-pill">
-<div class="card-body text-secondary">
-<div class="container d-flex h-100">
-<div class="h-100 align-items-center">
-    <div class="mx-auto">
-  <div class="card-body">
-<div class="text-center">
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/67/The_Last_of_Us_Logo_2.png" class="card-img-top" alt=""  width=50% height=50%>
-  	<!--créer une interaction pour le  email et ajouter la donnée mail -->
-				<input  type="email" placeholder="Email" name="email"/>
-			<p></p>
-				<!--créer une interaction pour le password  et ajouter la donnée password -->
-				<input type="password" placeholder="Password" name="password"/>
-				<br></br>
-		
-	<div class="d-grid gap-2 col-1 mx-auto" >
-  <button class="btn btn-primary" type="button">Connexion</button>
-</div>
-<div class="text-center">
-<div class= " text-decoration:none"</div>
-            <p>Si je n'est pas de compte <a href="http://site-ecommerce-the-last-of-us/inscription">créer un compte</a></p>
+
+	<div class="container">
+		<div class="d-flex">
+			<img src="https://upload.wikimedia.org/wikipedia/commons/6/67/The_Last_of_Us_Logo_2.png" class="m-auto" alt="" width="50%" height="auto"/>
+		</div>
+		<form method="POST" action="">
+			<div class="d-flex flex-column align-items-center my-3 p-2 border rounded">
+				<div class="d-grid">
+					<label for="email">Adresse e-mail</label>
+					<input  type="email" placeholder="Email" name="email" id="email"/>
+				</div>
+				<div class="d-grid">
+					<label for="password">Mot de passe</label>
+					<input type="password" placeholder="Password" name="password" id="password"/>
+				</div>
+				<button type="submit" class="btn btn-primary mt-3">Connexion</button>
 			</div>
+		</form>
+		<div class="d-flex justify-content-center">
+			<div>
+				<span>Si je n'ai pas de compte</span>
+				<a href="/inscription">créer un compte</a>
 			</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</center>	
+		</div>
+	</div>
 
 {% endblock %}

@@ -35,6 +35,12 @@ abstract class AbstractController {
         # Ajout de la navigation à tous les pages
         $params = array_merge($params, ['navigation' => $navigation]);
 
+        $user = $_SESSION['user'];
+        if (isset($user))
+        {
+            $params['user'] = $user;
+        }
+
         try {
             echo $this->twig->render(
                 $page,
