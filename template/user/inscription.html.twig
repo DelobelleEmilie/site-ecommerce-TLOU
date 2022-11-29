@@ -4,9 +4,16 @@
 {% endblock %}
 
 {% block content %}
-	<div class="container">
-		<p><img src="https://upload.wikimedia.org/wikipedia/commons/6/67/The_Last_of_Us_Logo_2.png"></p>
-		<form action="?page=pageConnexion" method="post">
+	<center>
+<div class="card" style="width: 50rem;">
+<div class=".border .rounded-pill">
+<div class="card-body text-secondary">
+<div class="container d-flex h-100">
+<div class="h-100 align-items-center">
+    <div class="mx-auto">
+  <div class="card-body">
+<div class="text-center">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/67/The_Last_of_Us_Logo_2.png" class="card-img-top" alt=""  width=50% height=50%>
 			<h1>S'inscrire</h1>
 
 			<div class="inputs">
@@ -14,27 +21,37 @@
 				<!--créer une interaction pour le  email et ajouter la donnée mail -->
 				<input type="mail" placeholder="Email" name="pseudo">
 
+				<br></br>
+
 				<!--créer une interaction pour le password  et ajouter la donnée password -->
 				<input type="password" placeholder="Password" name="mdp">
+
+				<br></br>
 
               
 				<input type="nom" placeholder="nom" name="nom">
 
+				<br></br>
+
                 
 				<input type="prénom" placeholder="prénom" name="prénom">
 
+				<br></br>
+
 				<input type="télephone" placeholder="télephone" name="télephone">
+
+				<br></br>
 
 					<input type="date d'anniversaire" placeholder="date d'anniversaire" name="mdp">
 
    <div class="dropdown-center">
-  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-Rôle
-  </button>
-  <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="#">Administrateur</a></li>
-    <li><a class="dropdown-item" href="#">Client</a></li>
-  </ul>
+    <div class="mb-4 pb-2">
+           <p>Rôle</p>  
+                    <select class="select">
+                      <option value="1">Administrateur</option>
+                      <option value="2">Client</option>
+                    </select>
+                  </div>
 </div>
 			</div>
 			<!--créer un bouton pour se connecter-->
