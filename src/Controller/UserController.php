@@ -33,7 +33,7 @@ class UserController extends AbstractResourceController
 
     public function register()
     {
-        $this->render('user/inscription.html.twig', []);
+        $this->render('user/inscriptiondown.html.twig', []);
     }
 
     #on récupère le type qui correspond à l'id
