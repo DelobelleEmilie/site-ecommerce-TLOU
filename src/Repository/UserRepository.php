@@ -23,22 +23,31 @@ class UserRepository extends AbstractRepository
         return $query->fetchAll();
     }
 
+    #préparer une requete en base pour récupérer un utilisateur via son mail
     public function findOneBy($criteria)
     {
+        #début de la requete pour faire un select
         $base = "SELECT id,mail,date_naissance,prénom,nom,mot_passe,role,télephone FROM shop_user WHERE ";
+       # stocker le nouveau tableau dans la variable $where
         $where = array_map(
+            #La fonction prend un élément, et le transforme en "élément = :élément"
             function ($key) {
                 return "$key = :$key";
             },
+            #récupère les clefs
             array_keys($criteria)
         );
+        # tableau d'éléments du type id = :id ou mail = :mail
+        #join prend ces éléments, et les colle ensemble avec " AND "
+        #Ce qui donne "id = :id AND mail = :mail"
+        #Qu'on rajoute à la requete de base
         $where = join(" AND ", $where);
-
+    
         $query = $this->DBConnexion->prepare($base . $where);
         $query->execute($criteria);
-
+    
         $result = $query->fetch();
-
+    
         return gettype($result) !== 'boolean' ? $result : null;
     }
 
