@@ -1,0 +1,41 @@
+{% extends "shared/layout.html.twig" %}
+
+{% block title %}
+   Profil
+{% endblock %}
+
+{% block content %}
+<h1> Bienvenue sur votre profil : {{entity.name}} {{entity.prenom}}</h1>
+
+<h1> Edition du profil<h1>
+<form>
+
+<h2>Modification de votre nom <h2>
+<input type="namenow" placeholder="namenow" name="namenow">
+<br></br>
+<input type="newname" placeholder="newname" name="newname">
+<br></br>
+<input type="passwordnnewnameew" placeholder="newname" name="newname">
+<br></br>
+	<!--créer un bouton pour se connecter-->
+<button type="submit" name="Submitted">Mettre à jour votre nom</button>
+<br></br>
+
+
+
+<h2>Modification de votre prenom<h2>
+<input type="prenomnow" placeholder="prenomnow" name="prenomnow">
+<br></br>
+<input type="prenomnew" placeholder="prenomnew" name="prenomnew">
+<br></br>
+<input type="prenomnew" placeholder="prenomnew" name="prenomnew">
+<br></br>
+	<!--créer un bouton pour se connecter-->
+<button type="submit" name="Submitted">Mettre à jour votre nom</button>
+<br></br>
+
+</form>
+</center>
+{% endblock %}
+
+{% endblock %}

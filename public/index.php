@@ -23,6 +23,9 @@ $router->get('/messageenvoie', 'messageenvoie#show');
 $router->get('/', 'lostpassword#show');
 $router->get('/lostpassword', 'lostpassword#show');
 
+$router->get('/', 'profil#show');
+$router->get('/profil', 'profil#show');
+
 $router->get('/', 'panier#show');
 $router->get('/panier', 'panier#show');
 
