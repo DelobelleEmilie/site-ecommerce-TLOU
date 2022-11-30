@@ -35,7 +35,11 @@ class AuthenticationManager
         }
     }
 
-
+    public function logout()
+    {
+        $this->user = null;
+        $_SESSION['user'] = null;
+    }
 
 
 }

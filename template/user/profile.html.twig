@@ -1,0 +1,51 @@
+{% extends "shared/layout.html.twig" %}
+
+{% block title %}
+   Profil
+{% endblock %}
+
+{% block content %}
+<div class="container">
+   <h1> Bienvenue sur votre profil : {{entity.prénom}} {{entity.nom}}</h1>
+
+   <h3> Edition du profil</h3>
+      <form action="" method="POST">
+
+         <div class="nb-3">
+            <label for="prénom" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="prénom" name="prénom" value="{{ entity.prénom }}"/>
+         </div>
+
+         <div class="nb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" value="{{ entity.nom }}"/>
+         </div>
+
+         <div class="nb-3">
+            <label for="date_naissance" class="form-label">Date de naissance</label>
+            <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="{{ entity.date_naissance }}"/>
+         </div>
+
+         <div class="nb-3">
+            <label for="mail" class="form-label">Adresse e-mail</label>
+            <input type="email" class="form-control" id="mail" name="mail" value="{{ entity.mail }}"/>
+         </div>
+
+         <div class="nb-3">
+            <label for="mot_passe" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="mot_passe" name="mot_passe" value="{{ entity.mot_passe }}"/>
+         </div>
+
+         <div class="nb-3">
+            <label for="télephone" class="form-label">Numéro de téléphone</label>
+            <input type="number" class="form-control" id="télephone" name="télephone" value="{{ entity.télephone }}"/>
+         </div>
+
+         <button type="submit" class="btn btn-primary" name="submit">
+            Mettre à jour
+         </button>
+      </form>
+
+</div>
+
+{% endblock %}

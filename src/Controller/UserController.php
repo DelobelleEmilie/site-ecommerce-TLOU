@@ -22,9 +22,9 @@ class UserController extends AbstractResourceController
     {
         if (!empty($_POST))
         {
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-    
+            $email = isset($_POST['email']) ? $_POST['email'] : null;
+            $password = isset($_POST['password']) ? $_POST['password'] : null;
+
             $user = $this->repository->verify($email, $password);
 
             if (isset($user)) {
@@ -32,14 +32,89 @@ class UserController extends AbstractResourceController
                 $url = $this->url('home#show');
                 $this->redirect($url);
             }
+
+            $error = "Combinaison email / mot de passe erronée.";
         }
     
-        $this->render('user/connexion.html.twig', []);
+        $this->render('user/connexion.html.twig', [
+            'email' => isset($email) ? $email : null,
+            'error' => isset($error) ? $error : null,
+        ]);
     }
 
     public function register()
     {
         $this->render('user/inscriptiondown.html.twig', []);
+    }
+
+    public function logout()
+    {
+        $this->authManager->logout();
+        $url = $this->url('home#show');
+        $this->redirect($url);
+    }
+
+    public function profile()
+    {
+        # Récupère l'utilisateur connecté
+        $user = $this->authManager->getUser();
+
+        # Si le formulaire est soumis
+        if (!empty($_POST))
+        {
+            $data = $_POST;
+            $data['role'] = $user['role'];
+
+            # L'utilisateur est mis à jour
+            $userId = $this->repository->update($user['id'], $data);
+
+            # On enregistre les nouvelles données dans le manager
+            $user = $this->repository->find($userId);
+            $this->authManager->setUser($user);
+
+            # Redirection vers la page d'accueil
+            $url = $this->url('home#show');
+            $this->redirect($url);
+        }
+
+        # Affiche le formulaire avec les infos actuelles
+        $this->render('user/profile.html.twig', [
+            'entity' => isset($user) ? $user : null
+        ]);
+    }
+
+    public function lostpassword()
+    {
+        # Si le formulaire est soumis
+        if (!empty($_POST))
+        {
+            $mail = isset($_POST['mail']) ? $_POST['mail'] : null;
+            $mot_passe = isset($_POST['password']) ? $_POST['password'] : null;
+
+            if (isset($mail) && strlen($mail) > 0 && isset($mot_passe) && strlen($mot_passe) > 0) {
+                $user = $this->repository->findOneBy(['mail' => $mail]);
+
+                if (isset($user)) {
+                    $user['mot_passe'] = $mot_passe;
+                    $this->repository->update($user['id'], $user);
+
+                    $url = $this->url('user#login');
+                    $this->redirect($url);
+                }
+                else {
+                    $error = "Cette adresse e-mail ne correspond à aucun compte.";
+                }
+            }
+            else {
+                $error = "Vous devez saisir une adresse e-mail et un nouveau mot de passe.";
+            }
+
+        }
+
+        # Affiche le formulaire de réinitialisation
+        $this->render('user/Lostpassword.html.twig', [
+            'error' => isset($error) ? $error : null
+        ]);
     }
 
     #on récupère le type qui correspond à l'id

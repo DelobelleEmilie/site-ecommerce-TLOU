@@ -9,17 +9,21 @@
 		<div class="d-flex">
 			<img src="https://upload.wikimedia.org/wikipedia/commons/6/67/The_Last_of_Us_Logo_2.png" class="m-auto" alt="" width="50%" height="auto"/>
 		</div>
+		{% if error %}
+		<div class="alert alert-danger m-2 text-center">
+			{{ error }}
+		</div>
+		{% endif %}
 		<form method="POST" action="">
 			<div class="d-flex flex-column align-items-center my-3 p-2 border rounded">
 				<div class="d-grid">
 					<label for="email">Adresse e-mail</label>
-					<input  type="email" placeholder="Email" name="email" id="email"/>
+					<input  type="email" placeholder="Email" name="email" id="email" value="{{ email }}"/>
 				</div>
 				<div class="d-grid">
 			
 					<label for="userPassword">Mot de passe :</label>
-					<input id="userPassword" type="password" required>
-					<input id="pin" type="password" inputmode="numeric" minlength="10">
+					<input id="userPassword" type="password" name="password" required>
 			
 				</div>
 				<span>Si j'ai oubliez mon mot de passe</span>

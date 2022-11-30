@@ -16,24 +16,20 @@ $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');
 $router->get('/', 'home#show');
 
 $router->get('/contact', 'contact#show');
+$router->post('/contact', 'contact#show');
 
-$router->get('/', 'messageenvoie#show');
-$router->get('/messageenvoie', 'messageenvoie#show');
-
-$router->get('/', 'lostpassword#show');
-$router->get('/lostpassword', 'lostpassword#show');
-
-$router->get('/', 'profil#show');
-$router->get('/profil', 'profil#show');
-
-$router->get('/', 'panier#show');
 $router->get('/panier', 'panier#show');
 
 #region user
 $router->get('/connexion','user#login');
 $router->post('/connexion','user#login');
+$router->get('/logout','user#logout');
 $router->get('/inscription','user#register');
 $router->post('/inscription','user#register');
+$router->get('/profile', 'user#profile');
+$router->post('/profile', 'user#profile');
+$router->get('/lostpassword', 'user#lostpassword');
+$router->post('/lostpassword', 'user#lostpassword');
 # Affiche la liste des utilisateurs
 $router->get('/user', 'user#showList');
 # Affiche le category :id

@@ -1,0 +1,52 @@
+{% extends "shared/layout.html.twig" %}
+
+{% block title %}
+    Bienvenue sur le Shop !
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+        <div class="d-flex">
+            <img src="http://www.leman-sans-frontiere.org//docs/upload/commun/contact.jpg" class="m-auto" alt=""
+                 width="10%" height="auto">
+        </div>
+        <div class="d-flex flex-column align-items-center my-3 p-2 border rounded">
+            {% if confirm %}
+                <p>Votre message a bien était envoyé</p>
+                <br></br>
+                <p>Nous vous recontacterons bientôt</p>
+            {% else %}
+                <h1>Formulaire de contact </h1>
+                <form action="" method="POST" class="w-50">
+                    <div>
+                        <legend>Contact</legend>
+                        <div class="d-grid">
+                            <label for="nom">Nom</label>
+                            <input type="text" name="nom" placeholder="Nom"/>
+                        </div>
+                        <div class="d-grid">
+                            <label for="prenom">Prénom</label>
+                            <input type="text" name="prenom" placeholder="Prénom"/>
+                        </div>
+                        <div class="d-grid">
+                            <label for="mail">Adresse e-mail</label>
+                            <input type="email" name="mail" placeholder="Adresse e-mail"/>
+                        </div>
+                        <div class="d-grid">
+                            <label for="tel">Numéro de téléphone</label>
+                            <input type="text" name="tel" placeholder="0123456789"/>
+                        </div>
+                        <div class="d-grid">
+                            <label for="mail">Votre message</label>
+                            <textarea placeholder="Votre message" rows="3"></textarea>
+                        </div>
+                        <input type="checkbox" id="tnc">
+                        <label for="tnc">J'accepte les CG</label>
+                    </div>
+                    <button type="submit">Envoiez le message</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}   

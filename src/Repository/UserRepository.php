@@ -25,7 +25,21 @@ class UserRepository extends AbstractRepository
 
     public function findOneBy($criteria)
     {
-        // TODO: Implement findOneBy() method.
+        $base = "SELECT id,mail,date_naissance,prénom,nom,mot_passe,role,télephone FROM shop_user WHERE ";
+        $where = array_map(
+            function ($key) {
+                return "$key = :$key";
+            },
+            array_keys($criteria)
+        );
+        $where = join(" AND ", $where);
+
+        $query = $this->DBConnexion->prepare($base . $where);
+        $query->execute($criteria);
+
+        $result = $query->fetch();
+
+        return gettype($result) !== 'boolean' ? $result : null;
     }
 
     public function findAllBy($criteria)
@@ -57,6 +71,8 @@ class UserRepository extends AbstractRepository
             'telephone' => $object['télephone']
         ];
 
+        echo print_r($params, true);
+
         if (isset($id)) {
             $query = $this->DBConnexion->prepare("UPDATE shop_user SET mail=:mail,date_naissance=:date_naissance,`prénom`=:prenom,nom=:nom,mot_passe=:mot_passe,role=:role,`télephone`=:telephone WHERE id=:id");
             $params['id'] = $id;
@@ -71,7 +87,10 @@ class UserRepository extends AbstractRepository
     }
 public function verify($email, $password)
 {
-    $query = $this->DBConnexion->prepare("SELECT mail, mot_passe, prénom, nom, role FROM shop_user WHERE mail=:email");
+    if (!isset($email) || strlen($email) == 0) { return null; }
+    if (!isset($password) || strlen($password) == 0) { return null; }
+
+    $query = $this->DBConnexion->prepare("SELECT id, mail, mot_passe, prénom, nom, role FROM shop_user WHERE mail=:email");
     $query->execute([
         'email' => $email
     ]);
