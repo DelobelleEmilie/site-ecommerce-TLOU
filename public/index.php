@@ -20,6 +20,9 @@ $router->get('/contact', 'contact#show');
 $router->get('/', 'messageenvoie#show');
 $router->get('/messageenvoie', 'messageenvoie#show');
 
+$router->get('/', 'lostpassword#show');
+$router->get('/lostpassword', 'lostpassword#show');
+
 $router->get('/', 'panier#show');
 $router->get('/panier', 'panier#show');
 

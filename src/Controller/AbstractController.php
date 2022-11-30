@@ -33,8 +33,17 @@ abstract class AbstractController {
 
         $navigation['Catégories'] = $this->url('category#showList');
         $navigation['Produits'] = $this->url('product#showList');
-        $navigation['Goodies'] = $this->url('goodies#showList');
-        $navigation['Jeux'] = $this->url('jeux#showList');
+        $navigation['Goodies'] =
+        [
+            ['label' => 'Vaiselle', 'url' => $this->url('Goodies#showList', ['category', 'vaiselle'])],
+            ['label' => 'Figurine', 'url' => $this->url('Goodies#showList', ['category', 'figurine'])],
+            ['label' => 'Accesoires', 'url' => $this->url('Goodies#showList', ['category', 'accesoire'])],
+        ];
+        
+        $navigation['Jeux'] = [
+            ['label' => 'Jeux PS4', 'url' => $this->url('jeux#showList', ['category', 'ps4'])],
+            ['label' => 'Jeux PS5', 'url' => $this->url('jeux#showList', ['category', 'ps5'])],
+        ];
         $navigation['Contact'] = $this->url('contact#show');
         # Ajout de la navigation à tous les pages
         $params = array_merge($params, ['navigation' => $navigation]);

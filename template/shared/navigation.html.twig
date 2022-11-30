@@ -8,12 +8,31 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                {% for key,value in navigation %}
-                    <li class="nav-item"><a href="{{ value }}" class="nav-link">{{ key }}</a></li>
+
+       {% for key,value in navigation %}
+{% if value is iterable %}
+        <div class="dropdown">
+           <button class="btn text-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+              {{ key }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+                {% for submenu in value %}
+                    <li class="dropdown-item"><a href="{{ submenu.url }}">{{ submenu.label|e }}</a></li>
                 {% endfor %}
+            </ul>
+        </div>
+    {% else %}
+        <li class="nav-item"><a href="{{ value }}" class="nav-link">{{ key }}</a></li>
+    {% endif %}
+{% endfor %}
             </ul>
 
             {% if user %}
+               <button class="btn text-secondary">
+                    <a href="/connexion" class="nav-link">
+                      <i class="bi bi-cart4"></i>
+                    </a>
+                </button>
                 <div class="dropdown">
                     <button class="btn text-secondary dropdown-toggle" type="button" id="navdropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
@@ -27,11 +46,13 @@
                     </ul>
                 </div>
             {% else %}
-                <button class="btn text-secondary">
+             <button class="btn text-secondary">
                     <a href="/connexion" class="nav-link">
                         <i class="bi bi-person-add"></i>
                     </a>
                 </button>
+             
+
             {% endif %}
         </div>
     </div>
