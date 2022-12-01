@@ -42,8 +42,11 @@ class UserRepository extends AbstractRepository
         #Ce qui donne "id = :id AND mail = :mail"
         #Qu'on rajoute à la requete de base
         $where = join(" AND ", $where);
-    
+
+        #$query Prépare et Exécute une requête SQL
+        #prepare la requete sql pour la connexion depuis la base de donnée
         $query = $this->DBConnexion->prepare($base . $where);
+        #excuter la base de donnée
         $query->execute($criteria);
     
         $result = $query->fetch();
@@ -68,8 +71,9 @@ class UserRepository extends AbstractRepository
     #Si $id est null => insert, sinon update
     public function update($id, $object)
     {
+        # la requete sql est nul
         $query = null;
-
+    #implanter les parametres des données
         $params = [
             'mail' => $object['mail'],
             'date_naissance' => $object['date_naissance'],
@@ -79,8 +83,9 @@ class UserRepository extends AbstractRepository
             'role' => $object['role'],
             'telephone' => $object['télephone']
         ];
-
+        #affiche les info lisible de la variable et renvoie true
         echo print_r($params, true);
+        # isset permet de détermine si une variable est déclarée et est différente de null
 
         if (isset($id)) {
             $query = $this->DBConnexion->prepare("UPDATE shop_user SET mail=:mail,date_naissance=:date_naissance,`prénom`=:prenom,nom=:nom,mot_passe=:mot_passe,role=:role,`télephone`=:telephone WHERE id=:id");
@@ -94,26 +99,30 @@ class UserRepository extends AbstractRepository
 
         return isset($id) ? $id : $this->DBConnexion->lastInsertId();
     }
+    #fonction qui verfier les mails et les mdp
 public function verify($email, $password)
 {
+    #si mail ou mdp = 0 alors sa retourne null
     if (!isset($email) || strlen($email) == 0) { return null; }
     if (!isset($password) || strlen($password) == 0) { return null; }
-
+    #prepare les données de la base
     $query = $this->DBConnexion->prepare("SELECT id, mail, mot_passe, prénom, nom, role FROM shop_user WHERE mail=:email");
+    #verifier le mail dans la base et excute le script
     $query->execute([
         'email' => $email
     ]);
+    #Recuper par défaut la base de données du user
     $user = $query->fetch();
 
     if (!isset($user))
     {
         return null;
     }
-
+    #si l'user rendre bien le mot de passe sa renvoie user
     if ($user['mot_passe'] == $password) {
         return $user;
     }
-
+    #sinon sa retour donnée null
     return null;
 }
 }
