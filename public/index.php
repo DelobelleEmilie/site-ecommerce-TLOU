@@ -23,7 +23,7 @@ $router->post('/contact', 'contact#show');
 
 //page de panier
 $router->get('/panier', 'panier#show');
-
+$router->post('/panier', 'panier#show');
 //page de connexion
 $router->get('/connexion','user#login');
 $router->post('/connexion','user#login');
