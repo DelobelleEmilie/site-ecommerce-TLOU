@@ -46,8 +46,11 @@ class UserController extends AbstractResourceController
 
     public function register()
     {
-        $mailerService = new MailerService();
-        $mailerService->sendRegisterSuccess("$mail");
+        $email = "";
+        $firstname = "";
+        $lastname = "";
+        $mailerService = new MailerService($this->twig);
+        $mailerService->sendRegisterSuccess($email, $firstname, $lastname);
     }
 
     public function logout()

@@ -4,12 +4,17 @@ namespace App\Service;
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
+use Twig\Environment;
 
 class MailerService
 {
-    public $mail;
+    private PHPMailer $mail;
+    private Environment $twig;
 
-    public function __construct() {
+    public function __construct(Environment $twig) {
+
+        $this->twig = $twig;
+
         $this->mail = new PHPMailer(true);
         $this->mail->CharSet = "UTF-8";
         $this->mail->IsSMTP(); // active SMTP
@@ -25,12 +30,12 @@ class MailerService
         $this->mail->setFrom('noreply@shop.fr', 'Shop');
     }
 
-    public function sendRegisterSuccess(string $to)
+    public function sendRegisterSuccess(string $email, string $firstname, string $lastname)
     {
         $this->mail->addAddress($email, $firstname . '' . $lastname);
         $this->mail->isHTML(true);
         $this->mail->Subject = 'Inscription à Shop';
-        $this->mail->Body = $twig->render("/mail/register_message.html.twig", [
+        $this->mail->Body = $this->twig->render("/mail/register_message.html.twig", [
             'email' => $email
         ]);
 

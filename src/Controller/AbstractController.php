@@ -12,7 +12,7 @@ use Twig\Loader\FilesystemLoader;
 abstract class AbstractController {
 
     private ?Router $router;
-    private Environment $twig;
+    protected Environment $twig;
     protected AuthenticationManager $authManager;
 
     public function __construct(?Router $router = null)
