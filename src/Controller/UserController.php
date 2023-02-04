@@ -7,6 +7,7 @@ namespace App\Controller;
 
 use App\Core\Router\Router;
 use App\Repository\UserRepository;
+use App\Service\MailerService;
 
 class UserController extends AbstractResourceController
 {
@@ -45,7 +46,8 @@ class UserController extends AbstractResourceController
 
     public function register()
     {
-        $this->render('user/inscriptiondown.html.twig', []);
+        $mailerService = new MailerService();
+        $mailerService->sendRegisterSuccess("$mail");
     }
 
     public function logout()
