@@ -15,27 +15,43 @@ $router = new Router(isset($_GET['url']) ? $_GET['url'] : '');
 #fonction router recuper l'url qui affiche la page twig
 $router->get('/', 'home#show');
 
+
+//page de contact
 $router->get('/contact', 'contact#show');
 $router->post('/contact', 'contact#show');
 
+
+//page de panier
 $router->get('/panier', 'panier#show');
 
-#region user
+//page de connexion
 $router->get('/connexion','user#login');
 $router->post('/connexion','user#login');
+
+//page deconnexion
 $router->get('/logout','user#logout');
+
+//page d'inscription
 $router->get('/inscription','user#register');
 $router->post('/inscription','user#register');
+
+//page de profil
 $router->get('/profile', 'user#profile');
 $router->post('/profile', 'user#profile');
+
+//page password lost
 $router->get('/lostpassword', 'user#lostpassword');
 $router->post('/lostpassword', 'user#lostpassword');
+
 # Affiche la liste des utilisateurs
 $router->get('/user', 'user#showList');
+
 # Affiche le category :id
 $router->get('/user/:id', 'user#show')->with('id', '[1-9][0-9]*');
+
 # Affiche un formulaire vide
 $router->get('/user/create', 'user#edit', 'user#create');
+
 # Enregistre le nouveau category
 $router->post('/user/create', 'user#edit');
 $router->get('/user/:id/edit', 'user#edit')->with('id', '[1-9][0-9]*');
@@ -46,10 +62,13 @@ $router->get('/user/:id/delete', 'user#delete')->with('id', '[1-9][0-9]*');
 #region category
 # Affiche la liste des category
 $router->get('/category', 'category#showList');
+
 # Affiche le category :id
 $router->get('/category/:id', 'category#show')->with('id', '[1-9][0-9]*');
+
 # Affiche un formulaire vide
 $router->get('/category/create', 'category#edit', 'category#create');
+
 # Enregistre le nouveau category
 $router->post('/category/create', 'category#edit');
 $router->get('/category/:id/edit', 'category#edit')->with('id', '[1-9][0-9]*');
