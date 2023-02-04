@@ -15,20 +15,26 @@
 		</div>
 		{% endif %}
 		<form method="POST" action="">
-			<div class="d-flex flex-column align-items-center my-3 p-2 border rounded">
-				<div class="d-grid">
-					<label for="email">Adresse e-mail</label>
-					<input  type="email" placeholder="Email" name="email" id="email" value="{{ email }}"/>
-				</div>
+			<div>
+				<label for="email" class="form-label">email</label>
+				<input
+						type="email"
+						placeholder="email"
+						class="form-control"
+						id="email"
+						name="email"
+						value="{{ mail}}"
+				/>
+
 				<div>
-					<label for="newpassword" class="form-label">Nouveau mot de passe</label>
+					<label for="password" class="form-label">Password</label>
 					<input
 							type="password2"
 							placeholder="5€CURIZ3D"
 							class="form-control"
-							id="newpassword"
-							name="newpassword"
-							value="{{ form.newpassword }}"
+							id="password"
+							name="password"
+							value="{{ password }}"
 					/>
 				</div>
 				<span>Si j'ai oubliez mon mot de passe</span>
