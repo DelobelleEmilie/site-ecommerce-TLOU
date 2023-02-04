@@ -46,11 +46,76 @@ class UserController extends AbstractResourceController
 
     public function register()
     {
-        $email = "";
-        $firstname = "";
-        $lastname = "";
-        $mailerService = new MailerService($this->twig);
-        $mailerService->sendRegisterSuccess($email, $firstname, $lastname);
+        $mail = $_POST['email'] ?? null;
+        $password = $_POST['password'] ?? null;
+        $telephone = $_POST['telephone'] ?? null;
+        $datedenaissance = $_POST['datedenaissance'] ?? null;
+        $firstname = $_POST['firstname'] ?? null;
+        $lastname = $_POST['lastname'] ?? null;
+
+        $form['values'] = [
+            'email' => $mail,
+            'password' => $password,
+            'telephone' => $telephone,
+            'datedenaissance' => $datedenaissance,
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+        ];
+        if (!empty($mail || $password || $telephone || $datedenaissance || $lastname)) {
+            $email = isset($_POST['email']) ? $_POST['email'] : null;
+            $password = isset($_POST['password']) ? $_POST['password'] : null;
+            $lastname = isset($_POST['lastname']) ? $_POST['lastname'] : null;
+            $telephone = isset($_POST['telephone']) ? $_POST['telephone'] : null;
+            $datedenaissance = isset($_POST['datedenaissance']) ? $_POST['datedenaissance'] : null;
+            $firstname = isset($_POST['firstname']) ? $_POST['firstname'] : null;
+
+            $user = $this->repository->verify($mail, $password, $lastname, $telephone, $datedenaissance, $firstname);
+
+
+            if (isset($email)) {
+                $this->authManager->setUser($email);
+                $url = $this->url('home#show');
+                $this->redirect($url);
+            }
+
+            if (isset($password)) {
+                $this->authManager->setUser($password);
+                $url = $this->url('home#show');
+                $this->redirect($url);
+            }
+
+            if (isset($lastname)) {
+                $this->authManager->setUser($lastname);
+                $url = $this->url('home#show');
+                $this->redirect($url);
+            }
+
+            if (isset($telephone)) {
+                $this->authManager->setUser($telephone);
+                $url = $this->url('home#show');
+                $this->redirect($url);
+            }
+
+            if (isset($datedenaissance)) {
+                $this->authManager->setUser($datedenaissance);
+                $url = $this->url('home#show');
+                $this->redirect($url);
+            }
+
+
+            if (isset($firstname)) {
+                $this->authManager->setUser($firstname);
+                $url = $this->url('home#show');
+                $this->redirect($url);
+
+
+                $error = "L'une des données est eronnés";
+            } else {
+                $mailerService = new MailerService();
+                $mailerService->sendRegisterSuccess($mail);
+            }
+
+        }
     }
 
     public function logout()

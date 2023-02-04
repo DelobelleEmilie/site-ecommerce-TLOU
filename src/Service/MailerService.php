@@ -9,6 +9,9 @@ use Twig\Environment;
 class MailerService
 {
     private PHPMailer $mail;
+//private = seule la classe peut voir/utiliser l'attibut
+//protected = la classe et ses héritières peuvent voir/utiliser l'attribut
+//public = tout le monde peut voir/utiliser l'attribut
     private Environment $twig;
 
     public function __construct(Environment $twig) {
