@@ -32,8 +32,8 @@ $router->post('/connexion','user#login');
 $router->get('/logout','user#logout');
 
 //page d'inscription
-$router->get('/inscription','user#inscription');
-$router->post('/inscription','user#inscription');
+$router->get('/inscription','user#register');
+$router->post('/inscription','user#register');
 
 //page de profil
 $router->get('/profile', 'user#profile');
