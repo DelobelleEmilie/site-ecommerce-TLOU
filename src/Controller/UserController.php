@@ -22,8 +22,7 @@ class UserController extends AbstractResourceController
 
     public function login()
     {
-        if (!empty($_POST))
-        {
+        if (!empty($_POST)) {
             $email = isset($_POST['email']) ? $_POST['email'] : null;
             $password = isset($_POST['password']) ? $_POST['password'] : null;
 
@@ -37,7 +36,7 @@ class UserController extends AbstractResourceController
 
             $error = "Combinaison email / mot de passe erronée.";
         }
-    
+
         $this->render('user/connexion.html.twig', [
             'email' => isset($email) ? $email : null,
             'error' => isset($error) ? $error : null,
@@ -115,8 +114,20 @@ class UserController extends AbstractResourceController
                 $mailerService->sendRegisterSuccess($mail);
             }
 
+            $error = "Combinaison email / mot de passe erronée.";
         }
+
+        $this->render('user/connexion.html.twig', [
+            'error' => isset($error) ? $error : null,
+            'email' => isset($mail) ? $mail : null,
+            'password' => isset($password) ? $password : null,
+            'telephone' => isisset($datedenaissance) ? $datedenaissance : null,
+            'firstname' => isset($firstname) ? $firstname : null,
+            'lastname' => isset($lastname) ? $lastname : null,
+        ]);
     }
+
+
 
     public function logout()
     {
