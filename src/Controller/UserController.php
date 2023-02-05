@@ -121,7 +121,7 @@ class UserController extends AbstractResourceController
             'error' => isset($error) ? $error : null,
             'email' => isset($mail) ? $mail : null,
             'password' => isset($password) ? $password : null,
-            'telephone' => isisset($datedenaissance) ? $datedenaissance : null,
+            'telephone' => isset($datedenaissance) ? $datedenaissance : null,
             'firstname' => isset($firstname) ? $firstname : null,
             'lastname' => isset($lastname) ? $lastname : null,
         ]);
