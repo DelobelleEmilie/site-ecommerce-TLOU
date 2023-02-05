@@ -117,7 +117,7 @@ class UserController extends AbstractResourceController
             $error = "Combinaison email / mot de passe erronée.";
         }
 
-        $this->render('user/connexion.html.twig', [
+        $this->render('user/inscription.html.twig', [
             'error' => isset($error) ? $error : null,
             'email' => isset($mail) ? $mail : null,
             'password' => isset($password) ? $password : null,
