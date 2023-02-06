@@ -69,7 +69,6 @@ class Router
 
         #Si on a une demande en GET, on parcours toutes les routes en GET, et on cherche une correspondance dans l'url.
             if ($route->match($this->url)) {
-
         #on déclenche l'action
                 return $route->call($this);
             }

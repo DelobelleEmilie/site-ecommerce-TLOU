@@ -3,7 +3,6 @@
 
 namespace App\Core\Router;
 
-
 class Route {
 
     private $callable;

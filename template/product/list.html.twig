@@ -6,19 +6,27 @@
 
 {% block content %}
 
-    <div class="container d-flex gap-5 p-5">
+    <div
+        class="container d-grid gap-5 p-5"
+        style="grid-template-columns: repeat(auto-fill, 300px); justify-content: center"
+    >
         {% if entities|length > 0 %}
             {% for entity in entities %}
-                <a href="{{ entity.link|e }}">
-                    <div class="card" style="width: 18rem;">
+                <div class="card">
+                    <a href="{{ entity.link|e }}">
                         <div class="card-header">
                             <h5 class="card-title">{{ entity.label|e }}</h5>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">Accéder au produit {{ entity.label|e|lower }}.</p>
-                        </div>
+                    </a>
+                    <div class="card-body">
+                        <p class="card-text">Accéder au produit {{ entity.label|e|lower }}.</p>
                     </div>
-                </a>
+                    <div class="text-end">
+                        <form method="POST" action="/cart/{{ entity.id }}/1">
+                            <button class="btn btn-success m-1" type="submit">Ajouter au panier</button>
+                        </form>
+                    </div>
+                </div>
             {% endfor %}
         {% else %}
             <div class="alert alert-info">

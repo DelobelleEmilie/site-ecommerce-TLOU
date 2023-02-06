@@ -5,7 +5,6 @@ namespace App\Controller;
 
 
 use App\Core\Router\Router;
-use App\Core\Security\AuthenticationManager;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
@@ -39,7 +38,7 @@ abstract class AbstractController {
             ['label' => 'Figurine', 'url' => $this->url('Goodies#showList', ['category', 'figurine'])],
             ['label' => 'Accesoires', 'url' => $this->url('Goodies#showList', ['category', 'accesoire'])],
         ];
-        
+
         $navigation['Jeux'] = [
             ['label' => 'Jeux PS4', 'url' => $this->url('jeux#showList', ['category', 'ps4'])],
             ['label' => 'Jeux PS5', 'url' => $this->url('jeux#showList', ['category', 'ps5'])],
@@ -50,9 +49,9 @@ abstract class AbstractController {
 
         $user = $this->authManager->getUser();
 
-        if (isset($user))
+        if (isset($_SESSION['user']))
         {
-            $params['user'] = $user;
+            $params['user'] = $_SESSION['user'];
         }
 
         try {

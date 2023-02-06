@@ -20,11 +20,12 @@ $router->get('/', 'home#show');
 $router->get('/contact', 'contact#show');
 $router->post('/contact', 'contact#show');
 
+$router->get('/messageenvoie', 'messageenvoie#show');
 
-//page de panier
-$router->get('/panier', 'panier#show');
-$router->post('/panier', 'panier#show');
-//page de connexion
+$router->get('/cart', 'cart#show');
+$router->post('/cart/:id/:quantity', 'cart#add')->with('id', '[1-9][0-9]*')->with('quantity', '[1-9][0-9]*');
+
+#region user
 $router->get('/connexion','user#login');
 $router->post('/connexion','user#login');
 
@@ -106,7 +107,6 @@ $router->get('/type/:id/delete', 'type#delete')->with('id', '[1-9][0-9]*');
     # fonction qui va comparer l'url demandée, et toutes les adresses enregistrées
     #Pour appeler la bonne action, ou générer une Exception
 try {
-  
     $router->run();
 }
 
