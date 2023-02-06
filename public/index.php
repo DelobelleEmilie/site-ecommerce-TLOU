@@ -23,6 +23,7 @@ $router->post('/contact', 'contact#show');
 $router->get('/messageenvoie', 'messageenvoie#show');
 
 $router->get('/cart', 'cart#show');
+
 $router->post('/cart/:id/:quantity', 'cart#add')->with('id', '[1-9][0-9]*')->with('quantity', '[1-9][0-9]*');
 
 #region user

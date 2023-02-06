@@ -13,6 +13,7 @@ class CartController extends AbstractController
         if (!isset($_SESSION['cart'])) {
             $_SESSION['cart'] = [];
         }
+
     }
 
     public function show()
