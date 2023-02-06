@@ -23,7 +23,6 @@ abstract class AbstractRepository
         if (is_string($this->DBConnexion)) {
             $controller = new ErrorController();
             $controller->show($this->DBConnexion);
-            die();
         }
     }
 
