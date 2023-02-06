@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Core\Router\Router;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
+use App\Service\AuthenticationManager;
 
 abstract class AbstractController {
 

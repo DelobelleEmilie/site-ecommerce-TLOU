@@ -21,6 +21,7 @@ class CartController extends AbstractController
         $this->render(
             'cart/show.html.twig',
             [
+//                juste pour transformer un objet en texte (format Jason)
                 'data' => json_encode($_SESSION['cart'])
             ]
         );
