@@ -14,7 +14,8 @@ class MailerService
 //public = tout le monde peut voir/utiliser l'attribut
     private Environment $twig;
 
-    public function __construct(Environment $twig) {
+    public function __construct(Environment $twig)
+    {
 
         $this->twig = $twig;
 
@@ -39,6 +40,18 @@ class MailerService
         $this->mail->isHTML(true);
         $this->mail->Subject = 'Inscription à Shop';
         $this->mail->Body = $this->twig->render("/mail/register_message.html.twig", [
+            'email' => $email
+        ]);
+
+        $this->mail->Send();
+    }
+
+    public function sendPasswordChange(string $email, string $firstname, string $lastname)
+    {
+        $this->mail->addAddress($email, $firstname . '' . $lastname);
+        $this->mail->isHTML(true);
+        $this->mail->Subject = 'Inscription à Shop';
+        $this->mail->Body = $this->twig->render("/mail/password_message.html.twig", [
             'email' => $email
         ]);
 
