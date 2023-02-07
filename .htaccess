@@ -6,5 +6,6 @@ RewriteCond %{REQUEST_FILENAME} !\.(css|js|png|jpg)$
 RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
 
 RewriteCond %{DOCUMENT_ROOT}/public%{REQUEST_URI} -f
+RewriteCond %{REQUEST_FILENAME} \.(css|js|png|jpg)$
 
 RewriteRule ^(.*)$ public/%{REQUEST_URI}
