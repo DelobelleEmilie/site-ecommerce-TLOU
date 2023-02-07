@@ -50,7 +50,7 @@ class CartController extends AbstractController
         }
 
         $this->render(
-            'cart/show.html.twig',
+            'Panier/panier.html.twig',
             [
                 'products' => $data
             ]
