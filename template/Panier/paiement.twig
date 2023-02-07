@@ -11,19 +11,179 @@ Bienvenue dans votre panier {{entity.name}} {{entity.prénom}}
     <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">
         |
     </div>
-
+    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">
+        adresse
+    </div>
     <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">
         |
     </div>
     <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">
         Livraison
     </div>
-    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">
+    <div class="progress-bar  " role="progressbar" style="width: 25%">
         |
     </div>
-    <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">
+    <div class="progress-bar  " role="progressbar" style="width: 25%">
         Paiement
     </div>
 </div>
 
+<div class="card-body">
+    <button class="btn text-secondary">Suivant<a href="/sucess" class="nav-link"></a></button>
+</div>
+
+<div class="container d-flex justify-content-center mt-5 mb-5">
+
+
+
+    <div class="row g-3">
+
+        <div class="col-md-6">
+
+            <span>Payment Method</span>
+            <div class="card">
+
+                <div class="accordion" id="accordionExample">
+
+                    <div class="card">
+                        <div class="card-header p-0" id="headingTwo">
+                            <h2 class="mb-0">
+                                <button class="btn btn-light btn-block text-left collapsed p-3 rounded-0 border-bottom-custom" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    <div class="d-flex align-items-center justify-content-between">
+
+                                        <span>Stripe</span>
+                                        <a href="insérer l'URL de destination ici"><img src="/images/Stripe_Logo,_revised_2016.svg.png" width="30"></a>
+                            </h2>
+                        </div>
+                                    </div>
+                                </button>
+
+                    <div class="card">
+                        <div class="card-header p-0">
+                            <h2 class="mb-0">
+                                <button class="btn btn-light btn-block text-left p-3 rounded-0" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <div class="d-flex align-items-center justify-content-between">
+
+                                        <span>Credit card</span>
+                                        <div class="icons">
+                                            <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                            <img src="https://i.imgur.com/W1vtnOV.png" width="30">
+                                            <img src="https://i.imgur.com/35tC99g.png" width="30">
+                                            <img src="https://i.imgur.com/2ISgYja.png" width="30">
+                                        </div>
+
+                                    </div>
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body payment-card-body">
+                                <span class="font-weight-normal card-text">Card Number</span>
+                                <div class="input">
+
+                                    <i class="fa fa-credit-card"></i>
+                                    <input type="text" class="form-control" placeholder="0000 0000 0000 0000">
+
+                                </div>
+
+                                <div class="row mt-3 mb-3">
+
+                                    <div class="col-md-6">
+
+                                        <span class="font-weight-normal card-text">Expiry Date</span>
+                                        <div class="input">
+
+                                            <i class="fa fa-calendar"></i>
+                                            <input type="text" class="form-control" placeholder="MM/YY">
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+
+                                        <span class="font-weight-normal card-text">CVC/CVV</span>
+                                        <div class="input">
+
+                                            <i class="fa fa-lock"></i>
+                                            <input type="text" class="form-control" placeholder="000">
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <span class="text-muted certificate-text"><i class="fa fa-lock"></i> Your transaction is secured with ssl certificate</span>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+            <span>Summary</span>
+
+            <div class="card">
+
+                <div class="d-flex justify-content-between p-3">
+
+                    <div class="d-flex flex-column">
+
+                    </div>
+
+                    <div class="mt-1">
+                        <sup class="super-price">{{ form.price }}</sup>
+    <sup class="super-price">{{ frais_port }}</sup>
+                    </div>
+
+    <p>prix total = {{ form.pricetotal }}</p>
+                </div>
+
+                <hr class="mt-0 line">
+
+                <div class="p-3">
+
+
+                </div>
+
+                <hr class="mt-0 line">
+
+
+                <div class="p-3 d-flex justify-content-between">
+
+                    <div class="d-flex flex-column">
+
+
+                    </div>
+
+                    Aujourdh'hui vous payez {{ form.price }}
+
+
+
+                </div>
+
+
+                <div class="p-3">
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
 {% endblock %}

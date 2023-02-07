@@ -1,0 +1,83 @@
+{% extends "shared/layout.html.twig" %}
+
+{% block title %}
+Bienvenue dans votre panier {{entity.name}} {{entity.prénom}}
+{% endblock %}
+{% block content %}
+  <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: 25%">
+            Produit
+        </div>
+        <div class="progress-bar bg-primary" role="progressbar" style="width: 25%">
+            |
+        </div>
+        <div class="progress-bar " role="progressbar" style="width: 25%">
+            adresse
+        </div>
+        <div class="progress-bar " role="progressbar" style="width: 25%">
+            |
+        </div>
+        <div class="progress-bar" role="progressbar" style="width: 25%">
+            Livraison
+        </div>
+        <div class="progress-bar  " role="progressbar" style="width: 25%">
+            |
+        </div>
+        <div class="progress-bar " role="progressbar" style="width: 25%">
+            Paiement
+        </div>
+    </div>
+
+<form action="" method="POST">
+
+    <div class="nb-3">
+        <label for="prénom" class="form-label">Prénom</label>
+        <input type="text" class="form-control" id="prénom" name="prénom" value="{{ entity.prénom }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" class="form-control" id="nom" name="nom" value="{{ entity.nom }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="mail" class="form-label">Adresse e-mail</label>
+        <input type="email" class="form-control" id="mail" name="mail" value="{{ entity.mail }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="Numéro de rue " class="form-label">Numéro de rue</label>
+        <input type="number" class="form-control" id="Numéro de rue" name="Numéro de rue" value="{{ entity.Numéro_de_rue }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="rue" class="form-label">rue</label>
+        <input type="text" class="form-control" id="rue" name="rue" value="{{ entity.rue }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="Complement d'adresse" class="form-label">Complement d'adresse</label>
+        <input type="number" class="form-control" id="Complement d'adresse" name="Complement d'adresse" value="{{ entity.Complement_adresse }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="Code postal" class="form-label">Code postal</label>
+        <input type="number" class="form-control" id="Code postal" name="Code postal" value="{{ entity.Code_postal }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="ville" class="form-label">ville</label>
+        <input type="text" class="form-control" id="ville" name="ville" value="{{ entity.ville }}"/>
+    </div>
+
+    <div class="nb-3">
+        <label for="téléphone" class="form-label">téléphone</label>
+        <input type="number" class="form-control" id="téléphone" name="téléphone" value="{{ entity.téléphone}}"/>
+    </div>
+
+    <button type="submit" class="btn btn-primary" name="submit">Suivant</button>
+
+    <div class="card-body">
+                        <button class="btn text-secondary">Suivant<a href="/adresse" class="nav-link"></a></button>
+                    </div>
+{% endblock %}
