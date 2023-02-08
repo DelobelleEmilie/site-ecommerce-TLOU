@@ -28,7 +28,7 @@ class CartController extends AbstractController
 
         $data = [];
 //        boucle sur chaque case du tableau, et récupère la clé (key) id et la valeur (value) quantity
-    //acces, pour chaque élément de mon panier
+        //acces, pour chaque élément de mon panier
         foreach ($cart as $id => $quantity) {
 //            Pour chaque élément de mon panier, je vais parcourir tous les produits
 //Pour chercher celui qui correspond à l'id
@@ -57,9 +57,10 @@ class CartController extends AbstractController
         );
     }
 
-    public function add($id, $quantity = 1) {
+    public function add($id, $quantity = 1)
+    {
         $cart = $_SESSION['cart'];
-        if(isset($cart[$id])) {
+        if (isset($cart[$id])) {
             $cart[$id] = $cart[$id] + $quantity;
         } else {
             $cart[$id] = $quantity;
@@ -70,11 +71,33 @@ class CartController extends AbstractController
         $this->redirect($url);
     }
 
-    public function removeOne($id) {
+    public function removeOne($id)
+    {
+        $cart = $_SESSION['cart'];
+        if (isset($cart[$id])) {
+            $cart[$id] = $cart[$id] - 1;
+            if ($cart[$id] == 0) {
+                unset($cart[$id]);
+            }
+            $_SESSION['cart'] = $cart;
+        }
 
+        $url = $this->url('cart#show');
+        $this->redirect($url);
     }
 
-    public function remove($id) {
+    public function remove($id, $quantity = 1)
+    {
+        $cart = $_SESSION['cart'];
+        if (isset($cart[$id])) {
+            $cart[$id] = $cart[$id] - $quantity;
+            if ($cart[$id] <= 0) {
+                unset($cart[$id]);
+            }
+            $_SESSION['cart'] = $cart;
+        }
 
+        $url = $this->url('cart#show');
+        $this->redirect($url);
     }
 }
