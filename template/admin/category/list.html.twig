@@ -1,0 +1,56 @@
+
+{% extends "adminLayout.html.twig" %}
+
+{% block title %}
+    Administration des catégories
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <h3>Liste des catégories</h3>
+        </div>
+        <div>
+            <a
+                    href="/?page=adminCategoryAdd"
+                    class="btn btn-success"
+            >
+                <i class="fa-sharp fa-solid fa-plus"></i>
+                 
+                Ajouter
+            </a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libellé</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %}
+                <tr>
+                    <td>{{ category.id }}</td>
+                    <td>{{ category.label }}</td>
+                    <td>
+                        <a
+                                class="btn btn-primary"
+                                href="/?page=adminCategoryEdit&category={{ category.id }}"
+                        >
+                            <i class="fa-sharp fa-solid fa-pen"></i>
+                        </a>
+                        <a
+                                class="btn btn-danger"
+                                href="/?page=adminCategoryDelete&category={{ category.id }}"
+                        >
+                            <i class="fa-sharp fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor%}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

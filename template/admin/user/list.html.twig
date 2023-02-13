@@ -1,0 +1,80 @@
+{% extends "adminLayout.html.twig" %}
+
+{% block title %}
+    Administration des utilisateurs
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <h3>Liste des utilisateurs</h3>
+        </div>
+        <div>
+            <a
+                    href="/?page=adminUserAdd"
+                    class="btn btn-success"
+            >
+                <i class="fa-sharp fa-solid fa-plus"></i>
+                 
+                Ajouter
+            </a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>E-mail</th>
+                <th>Prénom</th>
+                <th>Nom</th>
+                <th>Rôle</th>
+                <th>État</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.firstname }}</td>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <a
+                                class="btn btn-warning"
+                                href="/?page=adminUserToggleActive&user={{ user.id }}"
+                        >
+                            {% if user.active %}
+                                <i class="fa-sharp fa-solid fa-user"></i> Actif
+                            {% else %}
+                                <i class="fa-sharp fa-solid fa-user-slash"></i> Désactivé
+                            {% endif %}
+                        </a>
+                    </td>
+                    <td>
+                        <a
+                                class="btn btn-success"
+                                href="/?page=adminUserShow&user={{ user.id }}"
+                        >
+                            <i class="fa-sharp fa-solid fa-eye"></i>
+                        </a>
+                        <a
+                                class="btn btn-primary"
+                                href="/?page=adminUserEdit&user={{ user.id }}"
+                        >
+                            <i class="fa-sharp fa-solid fa-pen"></i>
+                        </a>
+                        <a
+                                class="btn btn-danger"
+                                href="/?page=adminUserDelete&user={{ user.id }}"
+                        >
+                            <i class="fa-sharp fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor%}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

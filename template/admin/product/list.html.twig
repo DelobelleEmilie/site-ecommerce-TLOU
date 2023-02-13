@@ -1,0 +1,69 @@
+{% extends "adminLayout.html.twig" %}
+
+{% block title %}
+    Administration des produits
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-center">
+            <h3>Liste des produits</h3>
+        </div>
+        <div>
+            <a
+                    href="/?page=adminProductAdd"
+                    class="btn btn-success"
+            >
+                <i class="fa-sharp fa-solid fa-plus"></i>
+                 
+                Ajouter
+            </a>
+        </div>
+        {#        thead, c'est l'entete#}
+        {#        et dans tbody, on boucle sur les produits pour dessiner les lignes#}
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Libellé</th>
+                <th>Prix</th>
+                <th>Catégorie</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.label }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>
+                        {#                        url dynamique#}
+                        <a
+                                class="btn btn-success"
+                                href="/?page=adminProductShow&product={{ product.id }}"
+                        >
+                            {#                            ajouter une icon#}
+                            <i class="fa-sharp fa-solid fa-eye"></i>
+                        </a>
+                        <a
+                                class="btn btn-primary"
+                                href="/?page=adminProductEdit&product={{ product.id }}"
+                        >
+                            <i class="fa-sharp fa-solid fa-pen"></i>
+                        </a>
+                        <a
+                                class="btn btn-danger"
+                                href="/?page=adminProductDelete&product={{ product.id }}"
+                        >
+                            <i class="fa-sharp fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor%}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
