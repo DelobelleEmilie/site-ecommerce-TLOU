@@ -31,13 +31,10 @@
             </ul>
 
             {% if user %}
-               <button class="btn text-secondary">
-                   <a href="3" class="nav-link">logout
-                      <i class="bi bi-cart4"></i>
-                    </a>
-                </button>
                 <button class="btn text-secondary">
-                    <a href="/show" class="nav-link">
+                    <a href="{{ logoutUrl }}" class="nav-link">
+                        Déconnexion
+                         
                         <i class="bi bi-box-arrow-right"></i>
                     </a>
                 </button>
@@ -45,10 +42,12 @@
                 <div class="dropdown">
                     <button class="btn text-secondary dropdown-toggle" type="button" id="navdropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user.prenom }} {{ user.nom }}
+                        {{ user.prénom }} {{ user.nom }}
                     </button>
                     <button class="btn text-secondary">
-                        <a href="/show" class="nav-link">
+                        <a href="{{ cartUrl }}" class="nav-link">
+                            Panier
+                             
                             <i class="bi bi-cart"></i>
                         </a>
                     </button>
