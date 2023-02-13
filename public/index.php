@@ -54,7 +54,7 @@ $router->get('/user', 'user#showList')->roles(['ROLE_ADMIN']);
 $router->get('/admin/user', 'user#adminList')->roles(['ROLE_ADMIN']);
 
 # Affiche le category :id
-$router->get('/admin/user/:id', 'user#show')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->get('/user/:id', 'user#show')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 $router->get('/admin/user/:id', 'user#adminShow')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 
 # Affiche un formulaire vide

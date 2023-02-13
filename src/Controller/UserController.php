@@ -224,6 +224,29 @@ class UserController extends AbstractResourceController
         );
     }
 
+    public function adminShow($id)
+    {
+        $entity = $this->repository->find($id);
+
+        #demander au router de générer une url
+        #demandes l'URL pour modifier et supprimer le type
+        $editUrl = $this->url('user#edit', [ 'id' => $id ]);
+        $deleteUrl = $this->url('user#delete', [ 'id' => $id ]);
+        $listUrl = $this->url('user#adminList');
+
+        #afficher du twig
+        #on lui envoie le type et les URL de modification et suppression en paramètre
+        $this->render(
+            'admin/user/detail.html.twig',
+            [
+                'entity' => $entity,
+                'listUrl' => $listUrl,
+                'editUrl' => $editUrl,
+                'deleteUrl' => $deleteUrl
+            ]
+        );
+    }
+
     public function showList()
     {
         #on récupère toutes les catégories depuis la base de données
@@ -304,7 +327,7 @@ class UserController extends AbstractResourceController
             ]);
         }
         else { // CREATE
-            $this->render('user/form.html.twig',[
+            $this->render('admin/user/form.html.twig',[
                 'listUrl' => $listUrl
             ]);
         }
