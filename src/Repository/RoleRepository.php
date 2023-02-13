@@ -1,6 +1,6 @@
 <?php
 
-use \App\Repository\AbstractRepository;
+namespace App\Repository;
 
 class RoleRepository extends AbstractRepository
 {
