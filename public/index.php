@@ -39,27 +39,27 @@ $router->get('/inscription','user#register');
 $router->post('/inscription','user#register');
 
 //page de profil
-$router->get('/profile', 'user#profile');
-$router->post('/profile', 'user#profile');
+$router->get('/profile', 'user#profile')->roles(['ROLE_USER']);
+$router->post('/profile', 'user#profile')->roles(['ROLE_USER']);
 
 //page password lost
 $router->get('/lostpassword', 'user#lostpassword');
 $router->post('/lostpassword', 'user#lostpassword');
 
 # Affiche la liste des utilisateurs
-$router->get('/user', 'user#showList');
+$router->get('/user', 'user#showList')->roles(['ROLE_ADMIN']);
 
 # Affiche le category :id
-$router->get('/user/:id', 'user#show')->with('id', '[1-9][0-9]*');
+$router->get('/user/:id', 'user#show')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 
 # Affiche un formulaire vide
-$router->get('/user/create', 'user#edit', 'user#create');
+$router->get('/user/create', 'user#edit', 'user#create')->roles(['ROLE_ADMIN']);
 
 # Enregistre le nouveau category
-$router->post('/user/create', 'user#edit');
-$router->get('/user/:id/edit', 'user#edit')->with('id', '[1-9][0-9]*');
-$router->post('/user/:id/edit', 'user#edit')->with('id', '[1-9][0-9]*');
-$router->get('/user/:id/delete', 'user#delete')->with('id', '[1-9][0-9]*');
+$router->post('/user/create', 'user#edit')->roles(['ROLE_ADMIN']);
+$router->get('/user/:id/edit', 'user#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->post('/user/:id/edit', 'user#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->get('/user/:id/delete', 'user#delete')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 #endregion
 
 #region category
@@ -70,13 +70,13 @@ $router->get('/category', 'category#showList');
 $router->get('/category/:id', 'category#show')->with('id', '[1-9][0-9]*');
 
 # Affiche un formulaire vide
-$router->get('/category/create', 'category#edit', 'category#create');
+$router->get('/category/create', 'category#edit', 'category#create')->roles(['ROLE_ADMIN']);
 
 # Enregistre le nouveau category
-$router->post('/category/create', 'category#edit');
-$router->get('/category/:id/edit', 'category#edit')->with('id', '[1-9][0-9]*');
-$router->post('/category/:id/edit', 'category#edit')->with('id', '[1-9][0-9]*');
-$router->get('/category/:id/delete', 'category#delete')->with('id', '[1-9][0-9]*');
+$router->post('/category/create', 'category#edit')->roles(['ROLE_ADMIN']);
+$router->get('/category/:id/edit', 'category#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->post('/category/:id/edit', 'category#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->get('/category/:id/delete', 'category#delete')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 #endregion
 
 #region product
@@ -85,25 +85,25 @@ $router->get('/product', 'product#showList');
 # Affiche le produit :id
 $router->get('/product/:id', 'product#show')->with('id', '[1-9][0-9]*');
 # Affiche un formulaire vide
-$router->get('/product/create', 'product#edit', 'product#create');
+$router->get('/product/create', 'product#edit', 'product#create')->roles(['ROLE_ADMIN']);
 # Enregistre le nouveau produit
-$router->post('/product/create', 'product#edit');
+$router->post('/product/create', 'product#edit')->roles(['ROLE_ADMIN']);
 # Affiche un formulaire avec les données du produit :id à modifier
-$router->get('/product/:id/edit', 'product#edit')->with('id', '[1-9][0-9]*');
+$router->get('/product/:id/edit', 'product#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 # Enregistre les modifications sur le produit
-$router->post('/product/:id/edit', 'product#edit')->with('id', '[1-9][0-9]*');
+$router->post('/product/:id/edit', 'product#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 # Supprime le produit :id
-$router->get('/product/:id/delete', 'product#delete')->with('id', '[1-9][0-9]*');
+$router->get('/product/:id/delete', 'product#delete')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 #endregion
 
 #region type
-$router->get('/type', 'type#showList');
-$router->get('/type/:id', 'type#show')->with('id', '[1-9][0-9]*');
-$router->get('/type/create', 'type#edit', 'type#create');
-$router->post('/type/create', 'type#edit');
-$router->get('/type/:id/edit', 'type#edit')->with('id', '[1-9][0-9]*');
-$router->post('/type/:id/edit', 'type#edit')->with('id', '[1-9][0-9]*');
-$router->get('/type/:id/delete', 'type#delete')->with('id', '[1-9][0-9]*');
+$router->get('/type', 'type#showList')->roles(['ROLE_ADMIN']);
+$router->get('/type/:id', 'type#show')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->get('/type/create', 'type#edit', 'type#create')->roles(['ROLE_ADMIN']);
+$router->post('/type/create', 'type#edit')->roles(['ROLE_ADMIN']);
+$router->get('/type/:id/edit', 'type#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->post('/type/:id/edit', 'type#edit')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
+$router->get('/type/:id/delete', 'type#delete')->with('id', '[1-9][0-9]*')->roles(['ROLE_ADMIN']);
 #endregion
 
     # fonction qui va comparer l'url demandée, et toutes les adresses enregistrées

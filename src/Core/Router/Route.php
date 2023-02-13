@@ -9,6 +9,7 @@ class Route {
     private $path;
     private $matches = [];
     private $params = [];
+    private $roles = [];
 
     public function __construct($path, $callable)
     {
@@ -44,6 +45,11 @@ class Route {
         return $this;
     }
 
+    public function roles(array $roles) {
+        $this->roles = $roles;
+        return $this;
+    }
+
     public function call($router) {
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
@@ -70,5 +76,13 @@ class Route {
             $path = str_replace(":$k", $v, $path);
         }
         return $path;
+    }
+
+    /**
+     * @return array
+     */
+    public function getRoles(): array
+    {
+        return $this->roles;
     }
 }
