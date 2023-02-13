@@ -1,4 +1,4 @@
-{% extends "adminLayout.html.twig" %}
+{% extends "shared/layout.html.twig" %}
 
 {% block title %}
     Administration des produits
@@ -9,26 +9,26 @@
     <div class="container">
         <!-- #Se charge ici de vérifier que la valeur de la variable passée dans le contrôleur n’est pas «null» ni égale à «false».
         #Dans ce cas les informations du produit peuvent être affichées
-        #Dans le cas où la variable «product» est «null» ou égale à «false», un message indique que le produit n’existe pas. -->
+        #Dans le cas où la variable «entity» est «null» ou égale à «false», un message indique que le produit n’existe pas. -->
         <div class="m-3">
-            {% if product %}
+            {% if entity %}
                 <div class="col-12">
-                    <h3 class="mb-5">{{ product.label }}</h3>
+                    <h3 class="mb-5">{{ entity.label }}</h3>
                 </div>
 
                 <div class="row">
                     <div class="col-md-4 d-flex justify-content-center">
-                        {% if product.image %}
-                            <img src="{{ product.image }}" class="rounded-start object-fit-contain" alt="...">
+                        {% if entity.image %}
+                            <img src="{{ entity.image }}" class="rounded-start object-fit-contain" alt="...">
                         {% else %}
                             <img src="https://fakeimg.pl/350x200/?text=Image" class="img-fluid rounded-start" alt="...">
                         {% endif %}
                     </div>
                     <div class="col-md-5 text-secondary">
-                        <p>{{ product.description }}</p>
+                        <p>{{ entity.description }}</p>
                     </div>
                     <div class="col-md-3 bg-light text-center p-5">
-                        <h5 class="h1 text-primary">{{ product.price }} €</h5>
+                        <h5 class="h1 text-primary">{{ entity.price }} €</h5>
                     </div>
                 </div>
             {% else %}
@@ -36,7 +36,7 @@
             {% endif %}
         </div>
         <a
-                href="/?page=adminProductList"
+                href="{{ listUrl }}"
                 class="btn btn-secondary"
         >
             <i class="fa-sharp fa-solid fa-arrow-left-long"></i>
@@ -44,7 +44,7 @@
             Retourner à la liste
         </a>
         <a
-                href="/?page=adminProductEdit&product={{ product.id }}"
+                href="{{ editUrl }}"
                 class="btn btn-primary"
         >
             <i class="fa-sharp fa-solid fa-pen"></i>

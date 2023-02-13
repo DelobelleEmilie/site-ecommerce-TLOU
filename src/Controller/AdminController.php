@@ -50,6 +50,7 @@ class AdminController extends AbstractController
             'message' => $message
         ]);
     }
+
     function AdminCategoryDeleteController($twig, $db)
     {
         $id = $_GET['category'] ?? null;
@@ -380,7 +381,7 @@ class AdminController extends AbstractController
         }
         $product['category'] = $label;
 
-        echo $twig->render('admin/product/show.html.twig', [
+        echo $twig->render('admin/product/detail.html.twig', [
             'product' => $product,
         ]);
     }
@@ -555,7 +556,7 @@ class AdminController extends AbstractController
         }
         $user['role'] = $label;
 
-        echo $twig->render('admin/user/show.html.twig', [
+        echo $twig->render('admin/user/detail.html.twig', [
             'user' => $user,
         ]);
     }

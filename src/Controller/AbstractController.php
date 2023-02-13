@@ -45,15 +45,19 @@ abstract class AbstractController {
             ['label' => 'Jeux PS5', 'url' => $this->url('jeux#showList', ['category', 'ps5'])],
         ];
         $navigation['Contact'] = $this->url('contact#show');
-        # Ajout de la navigation à tous les pages
-        $params = array_merge($params, ['navigation' => $navigation]);
 
         $user = $this->authManager->getUser();
+        $roles = $this->authManager->getRoles();
 
-        if (isset($_SESSION['user']))
+        if (in_array('ROLE_ADMIN', $roles))
         {
-            $params['user'] = $_SESSION['user'];
+            $navigation['Administration'] = [
+                ['label' => 'Produits', 'url' => $this->url('product#adminList')],
+            ];
         }
+
+        # Ajout de la navigation à tous les pages
+        $params = array_merge($params, ['navigation' => $navigation]);
 
         try {
             echo $this->twig->render(
