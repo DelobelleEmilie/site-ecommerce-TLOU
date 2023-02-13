@@ -9,6 +9,8 @@
 #tout les élements se  connait ducoup pas besoin d'importer les fichiers
 namespace App\Core\Router;
 
+use App\Core\Security\AuthenticationManager;
+
 class Router
 {
     #attributs privés, on va y stocker l'url
@@ -18,11 +20,14 @@ class Router
         #attributs privés, on va y stocker les noms de routes
     private $nameRoutes = [];
 
+    private AuthenticationManager $authManager;
+
     #fonction public qui permet de construit le router
     public function __construct($url)
     {
         #met l'adresse demandée par le navigateur en paramètre
         $this->url = $url;
+        $this->authManager = new AuthenticationManager();
     }
 
 
@@ -69,8 +74,12 @@ class Router
 
         #Si on a une demande en GET, on parcours toutes les routes en GET, et on cherche une correspondance dans l'url.
             if ($route->match($this->url)) {
-        #on déclenche l'action
-                return $route->call($this);
+                # Vérification des roles
+                if ($this->authManager->hasPermission($route->getRoles())) {
+                    #on déclenche l'action
+                    return $route->call($this);
+                }
+                throw new RouterException('Insuffisant permission.');
             }
         }
         #Si même en cherchant bien, on ne trouve pas de correspondance, on lève une routerexception

@@ -41,5 +41,26 @@ class AuthenticationManager
         $_SESSION['user'] = null;
     }
 
+    public function hasPermission(array $roles) {
+        if (!isset($roles)) { return true; }
+        if (count($roles) === 0) { return true; }
+        if (!isset($this->user)) { return false; }
 
+        $userRoles = $this->user['role'];
+        if ($userRoles[0] === '[') {
+            $userRoles = json_decode($userRoles);
+        }
+        else {
+            $userRoles = [$userRoles];
+        }
+        $userRoles[] = 'ROLE_USER';
+
+        foreach ($userRoles as $userRole) {
+            if (in_array($userRole, $roles)){
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
