@@ -318,6 +318,10 @@ class UserController extends AbstractResourceController
 
         $listUrl = $this->url('user#adminList');
 
+        $roles = [
+
+        ];
+
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
             $entity = $this->repository->find($id);
