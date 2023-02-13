@@ -22,7 +22,10 @@ $router->post('/contact', 'contact#show');
 
 $router->get('/messageenvoie', 'messageenvoie#show');
 
+//panier
 $router->get('/cart', 'cart#show');
+$router->post('/cart', 'cart#show');
+
 //créer la route.
 //Id doit être un entier, et quantity aussi
 $router->post('/cart/:id/:quantity', 'cart#add')->with('id', '[1-9][0-9]*')->with('quantity', '[1-9][0-9]*');

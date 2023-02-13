@@ -24,7 +24,7 @@ class ProductRepository extends AbstractRepository
 
     public function findAll()
     {
-        $query = $this->DBConnexion->prepare("SELECT id, label FROM shop_product");
+        $query = $this->DBConnexion->prepare("SELECT id, label, price, image FROM shop_product");
         $query->execute();
         return $query->fetchAll();
     }

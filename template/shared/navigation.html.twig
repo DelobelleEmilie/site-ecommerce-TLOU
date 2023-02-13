@@ -37,7 +37,7 @@
                     </a>
                 </button>
                 <button class="btn text-secondary">
-                    <a href="/panier" class="nav-link">
+                    <a href="/show" class="nav-link">
                         <i class="bi bi-box-arrow-right"></i>
                     </a>
                 </button>
@@ -45,7 +45,12 @@
                 <div class="dropdown">
                     <button class="btn text-secondary dropdown-toggle" type="button" id="navdropdown"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                        {{ user.prénom|e }} {{ user.nom|e }}
+                        {{ user.prenom }} {{ user.nom }}
+                    </button>
+                    <button class="btn text-secondary">
+                        <a href="/show" class="nav-link">
+                            <i class="bi bi-cart"></i>
+                        </a>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li class="dropdown-item"><a href="/profile">Mon profil</a></li>
@@ -53,6 +58,7 @@
                         <div class="dropdown-divider"></div>
                     </ul>
                 </div>
+
             {% else %}
              <button class="btn text-secondary">
                     <a href="/connexion" class="nav-link">
@@ -64,11 +70,7 @@
                         <i class="bi bi-person-add"></i>
                     </a>
                 </button>
-                <button class="btn text-secondary">
-                    <a href="/panier" class="nav-link">
-                        <i class="bi bi-cart"></i>
-                    </a>
-                </button>
+
 
             {% endif %}
         </div>

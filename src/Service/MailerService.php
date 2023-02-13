@@ -39,7 +39,7 @@ class MailerService
         $this->mail->addAddress($email, $firstname . '' . $lastname);
         $this->mail->isHTML(true);
         $this->mail->Subject = 'Inscription à Shop';
-        $this->mail->Body = $this->twig->render("/mail/register_message.html.twig", [
+        $this->mail->Body = $this->twig->render("/mail/register.html.twig", [
             'email' => $email
         ]);
 
@@ -51,7 +51,19 @@ class MailerService
         $this->mail->addAddress($email, $firstname . '' . $lastname);
         $this->mail->isHTML(true);
         $this->mail->Subject = 'Inscription à Shop';
-        $this->mail->Body = $this->twig->render("/mail/password_message.html.twig", [
+        $this->mail->Body = $this->twig->render("/mail/password.html.twig", [
+            'email' => $email
+        ]);
+
+        $this->mail->Send();
+    }
+
+    public function Commandegood(string $email, string $firstname, string $lastname)
+    {
+        $this->mail->addAddress($email, $firstname . '' . $lastname);
+        $this->mail->isHTML(true);
+        $this->mail->Subject = 'Commande passer ';
+        $this->mail->Body = $this->twig->render("/mail/commande.html.twig", [
             'email' => $email
         ]);
 
