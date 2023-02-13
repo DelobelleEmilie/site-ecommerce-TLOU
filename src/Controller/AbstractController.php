@@ -60,7 +60,7 @@ abstract class AbstractController {
         # Ajout de la navigation à tous les pages
         $params = array_merge($params, ['navigation' => $navigation]);
         $params = array_merge($params, ['user' => $user]);
-
+//        ajouter la navigation en plus des parametres twig de base
         $params = array_merge($params, ['cartUrl' => $this->url('cart#show')]);
         $params = array_merge($params, ['logoutUrl' => $this->url('user#logout')]);
 
