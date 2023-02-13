@@ -31,7 +31,6 @@ abstract class AbstractController {
 
         $navigation = [];
 
-        $navigation['Catégories'] = $this->url('category#showList');
         $navigation['Produits'] = $this->url('product#showList');
         $navigation['Goodies'] =
         [
