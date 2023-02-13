@@ -128,7 +128,7 @@ class ProductController extends AbstractResourceController
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
             $entity = $this->repository->find($id);
-            $this->render('product/form.html.twig',[
+            $this->render('admin/product/form.html.twig',[
                 'entity' => $entity,
                 'categories' => $categories,
                 'types' => $types,
@@ -136,7 +136,7 @@ class ProductController extends AbstractResourceController
             ]);
         }
         else { // CREATE
-            $this->render('product/form.html.twig',[
+            $this->render('admin/product/form.html.twig',[
                 'categories' => $categories,
                 'types' => $types,
                 'listUrl' => $listUrl

@@ -251,6 +251,36 @@ class UserController extends AbstractResourceController
         );
     }
 
+    public function adminList()
+    {
+        #on récupère toutes les catégories depuis la base de données
+        $entities = $this->repository->findAll();
+
+        #array_map, c'est une function qui prend 2 paramètres
+        $entities = array_map(
+        #tableau qui ajouter un lien (link) à ma catégorie
+            function ($entity) {
+                $entity['show'] = $this->url('user#adminShow', ['id' => $entity['id']]);
+                $entity['edit'] = $this->url('user#edit', ['id' => $entity['id']]);
+                $entity['delete'] = $this->url('user#delete', ['id' => $entity['id']]);
+                $entity['toggleActive'] = $this->url('user#toggleActive', ['id' => $entity['id']]);
+                return $entity;
+            },
+            $entities
+        );
+
+        $addUrl = $this->url('user#create');
+
+        #envoie toutes les catégories à twig
+        $this->render(
+            'admin/user/list.html.twig',
+            [
+                'entities' => $entities,
+                'addUrl' => $addUrl
+            ]
+        );
+    }
+
     public function edit($id = null)
     {
         // On a des données du formulaire, on enregistre en base
@@ -263,7 +293,7 @@ class UserController extends AbstractResourceController
             $this->redirect($url);
         }
 
-        $listUrl = $this->url('user#showList');
+        $listUrl = $this->url('user#adminList');
 
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
@@ -287,7 +317,18 @@ class UserController extends AbstractResourceController
 
         #sert à rediriger vers /category
         #génère l'URL
-        $listUrl = $this->url('user#showList');
+        $listUrl = $this->url('user#adminList');
+        #redirige l'url
+        $this->redirect($listUrl);
+    }
+
+    public function toggleActive($id)
+    {
+        $this->repository->toggleActive($id);
+
+        #sert à rediriger vers /category
+        #génère l'URL
+        $listUrl = $this->url('user#adminList');
         #redirige l'url
         $this->redirect($listUrl);
     }

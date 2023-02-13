@@ -1,4 +1,4 @@
-{% extends "adminLayout.html.twig" %}
+{% extends "shared/layout.html.twig" %}
 
 {% block title %}
     Administration des produits
@@ -26,13 +26,13 @@
                             class="form-control"
                             id="label"
                             name="label"
-                            value="{{ form.label }}"
+                            value="{{ entity.label }}"
                     />
                 </div>
             </div>
 
             <a
-                    href="/?page=adminProductList"
+                    href="{{ listUrl }}"
                     class="btn btn-secondary"
             >
                 <i class="fa-sharp fa-solid fa-arrow-left-long"></i>

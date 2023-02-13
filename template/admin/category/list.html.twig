@@ -1,5 +1,5 @@
 
-{% extends "adminLayout.html.twig" %}
+{% extends "shared/layout.html.twig" %}
 
 {% block title %}
     Administration des catégories
@@ -12,7 +12,7 @@
         </div>
         <div>
             <a
-                    href="/?page=adminCategoryAdd"
+                    href="{{ addUrl }}"
                     class="btn btn-success"
             >
                 <i class="fa-sharp fa-solid fa-plus"></i>
@@ -29,20 +29,20 @@
             </tr>
             </thead>
             <tbody>
-            {% for category in categories %}
+            {% for entity in entities %}
                 <tr>
-                    <td>{{ category.id }}</td>
-                    <td>{{ category.label }}</td>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.label }}</td>
                     <td>
                         <a
                                 class="btn btn-primary"
-                                href="/?page=adminCategoryEdit&category={{ category.id }}"
+                                href="{{ entity.edit }}"
                         >
                             <i class="fa-sharp fa-solid fa-pen"></i>
                         </a>
                         <a
                                 class="btn btn-danger"
-                                href="/?page=adminCategoryDelete&category={{ category.id }}"
+                                href="{{ entity.delete }}"
                         >
                             <i class="fa-sharp fa-solid fa-trash"></i>
                         </a>

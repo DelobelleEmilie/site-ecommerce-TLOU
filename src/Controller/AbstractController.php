@@ -52,6 +52,8 @@ abstract class AbstractController {
         {
             $navigation['Administration'] = [
                 ['label' => 'Produits', 'url' => $this->url('product#adminList')],
+                ['label' => 'Catégories', 'url' => $this->url('category#adminList')],
+                ['label' => 'Utilisateurs', 'url' => $this->url('user#adminList')],
             ];
         }
 
