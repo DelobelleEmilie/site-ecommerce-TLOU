@@ -1,4 +1,4 @@
-{% extends "adminLayout.html.twig" %}
+{% extends "shared/layout.html.twig" %}
 
 {% block title %}
     Administration des produits
@@ -11,7 +11,7 @@
         </div>
         <div>
             <a
-                    href="/?page=adminProductAdd"
+                    href="{{ addUrl }}"
                     class="btn btn-success"
             >
                 <i class="fa-sharp fa-solid fa-plus"></i>
@@ -32,30 +32,30 @@
             </tr>
             </thead>
             <tbody>
-            {% for product in products %}
+            {% for entity in entities %}
                 <tr>
-                    <td>{{ product.id }}</td>
-                    <td>{{ product.label }}</td>
-                    <td>{{ product.price }}</td>
-                    <td>{{ product.category }}</td>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.label }}</td>
+                    <td>{{ entity.price }}</td>
+                    <td>{{ entity.category }}</td>
                     <td>
                         {#                        url dynamique#}
                         <a
                                 class="btn btn-success"
-                                href="/?page=adminProductShow&product={{ product.id }}"
+                                href="{{ entity.show }}"
                         >
                             {#                            ajouter une icon#}
                             <i class="fa-sharp fa-solid fa-eye"></i>
                         </a>
                         <a
                                 class="btn btn-primary"
-                                href="/?page=adminProductEdit&product={{ product.id }}"
+                                href="{{ entity.edit }}"
                         >
                             <i class="fa-sharp fa-solid fa-pen"></i>
                         </a>
                         <a
                                 class="btn btn-danger"
-                                href="/?page=adminProductDelete&product={{ product.id }}"
+                                href="{{ entity.delete }}"
                         >
                             <i class="fa-sharp fa-solid fa-trash"></i>
                         </a>

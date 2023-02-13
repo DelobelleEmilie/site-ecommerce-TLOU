@@ -1,197 +1,49 @@
-{% extends "adminLayout.html.twig" %}
-
-{% block title %}
-    Administration des utilisateurs
-{% endblock %}
+{% extends "shared/resource/form.html.twig" %}
 
 {% block content %}
+    <form action="" method="POST">
 
-    <div class="container">
-
-        {% if message != null %}
-            <div class="alert alert-{{ status|default('info') }} text-center">
-                {{ message }}
-            </div>
-        {% endif %}
-
-        {# #L’attribut «enctype»,indique à PHP que toutes les informations relatives à notre fichier doivent être stockées sous la forme d’un tableau au travers de la variable globale «$_FILES» #}
-
-        <div class="m-3">
-            {#            gestion du profil #}
-            {% if profile %}
-                <h4>Gestion du profil</h4>
-            {% endif %}
-            {% if (controller == 'edit' or controller == 'profile') %}
-            <ul class="nav nav-tabs" id="form-tab" role="tablist">
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link {% if activeTab == 'main' %} active {% endif %}" id="main-tab"
-                            data-bs-toggle="tab" data-bs-target="#main-tab-pane" type="button" role="tab"
-                            aria-controls="main-tab-pane" aria-selected="true">Général
-                    </button>
-                </li>
-                <li class="nav-item" role="presentation">
-                    <button class="nav-link {% if activeTab == 'password' %} active {% endif %}" id="password-tab"
-                            data-bs-toggle="tab" data-bs-target="#password-tab-pane" type="button" role="tab"
-                            aria-controls="password-tab-pane" aria-selected="false">Mot de passe
-                    </button>
-                </li>
-            </ul>
-            <div class="tab-content" id="form-tab-content">
-                <div class="tab-pane fade {% if activeTab == 'main' %} show active {% endif %}" id="main-tab-pane"
-                     role="tabpanel" aria-labelledby="main-tab" tabindex="0">
-
-                    {% endif %}
-                    <form action="" method="POST" enctype="multipart/form-data">
-
-                        <div class="m-3">
-                            <label for="firstname" class="form-label">Prénom</label>
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    id="firstname"
-                                    name="firstname"
-                                    value="{{ form.firstname }}"
-                            />
-                        </div>
-
-                        <div class="m-3">
-                            <label for="lastname" class="form-label">Nom</label>
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    id="lastname"
-                                    name="lastname"
-                                    value="{{ form.lastname }}"
-                            />
-                        </div>
-
-                        <div class="m-3">
-                            <label for="email" class="form-label">Adresse e-mail</label>
-                            <input
-                                    type="text"
-                                    class="form-control"
-                                    id="email"
-                                    name="email"
-                                    value="{{ form.email }}"
-                            />
-                        </div>
-
-                        {% if controller != 'profile' %}
-                            <div class="m-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="active" name="active"
-                                           value="1" {% if form.active %} checked {% endif %}>
-                                    <label class="form-check-label" for="active">
-                                        Compte activé
-                                    </label>
-                                </div>
-                            </div>
-
-
-                            <div class="m-3">
-                                <label for="idRole" class="form-label">Role</label>
-                                <select
-                                        class="form-select"
-                                        name="idRole"
-                                        id="idRole"
-                                >
-                                    {% for role in roles %}
-                                        <option
-                                                value="{{ role.id }}"
-                                                {% if role.id == form.idRole %} selected {% endif %}
-                                        >
-                                            {{ role.label }}
-                                        </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        {% endif %}
-                        {% if (controller == 'edit' or controller == 'profile') %}
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa-sharp fa-solid fa-floppy-disk"></i>
-                             
-                            Modifier
-                        </button>
-                    </form>
-                </div>
-                <div class="tab-pane fade {% if activeTab == 'password' %} show active {% endif %}"
-                     id="password-tab-pane" role="tabpanel" aria-labelledby="password-tab" tabindex="1">
-                    <form action="" method="POST">
-                        {% endif %}
-                        {% if controller == 'profile' %}
-                            <div class="m-3">
-                                <label for="old-password" class="form-label">
-                                    Ancien mot de passe
-                                </label>
-                                <input
-                                        type="password"
-                                        placeholder="5€CURIZ3D"
-                                        class="form-control"
-                                        id="old-password"
-                                        name="old-password"
-                                />
-                            </div>
-                        {% endif %}
-                        <div class="m-3">
-                            <label for="new-password" class="form-label">
-                                {% if controller == 'add' %} Mot de passe {% else %} Nouveau mot de passe {% endif %}
-                            </label>
-                            <input
-                                    type="password"
-                                    placeholder="5€CURIZ3D"
-                                    class="form-control"
-                                    id="new-password"
-                                    name="new-password"
-                            />
-                        </div>
-                        <div class="m-3">
-                            <label for="confirm-password" class="form-label">
-                                {% if controller == 'add' %} Confirmez le mot de passe {% else %} Confirmez le nouveau mot de passe {% endif %}
-                            </label>
-                            <input
-                                    type="password"
-                                    placeholder="5€CURIZ3D"
-                                    class="form-control"
-                                    id="confirm-password"
-                                    name="confirm-password"
-                            />
-                        </div>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fa-sharp fa-solid fa-floppy-disk"></i>
-                             
-                            {#            #vérifier la valeur de la variable controller. Selon la valeur de cette variable, une étiquette différente sera insérée dans le bouton. #}
-                            {% if controller == 'add' %}
-                                Ajouter
-                            {% else %}
-                                Modifier
-                            {% endif %}
-                        </button>
-                    </form>
-                </div>
-
-                {% if controller == 'profile' %}
-                    <div class="accordion m-3" id="accordionExample">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    Désactiver le compte
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <a href="/?page=inactiveUser" class="btn btn-warning">
-                                        Désactiver le compte
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                {% endif %}
-            </div>
+        <div class="nb-3">
+            <label for="prénom" class="form-label">Prénom</label>
+            <input type="text" class="form-control" id="prénom" name="prénom" value="{{ entity.prénom }}"/>
         </div>
 
-    </div>
+        <div class="nb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" name="nom" value="{{ entity.nom }}"/>
+        </div>
 
+        <div class="nb-3">
+            <label for="date_naissance" class="form-label">Date de naissance</label>
+            <input type="date" class="form-control" id="date_naissance" name="date_naissance" value="{{ entity.date_naissance }}"/>
+        </div>
 
+        <div class="nb-3">
+            <label for="mail" class="form-label">Adresse e-mail</label>
+            <input type="email" class="form-control" id="mail" name="mail" value="{{ entity.mail }}"/>
+        </div>
+
+        <div class="nb-3">
+            <label for="mot_passe" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="mot_passe" name="mot_passe" value="{{ entity.mot_passe }}"/>
+        </div>
+
+        <div class="nb-3">
+            <label for="role" class="form-label">Roles</label>
+            <input type="text" class="form-control" id="role" name="role" value="{{ entity.role }}"/>
+        </div>
+
+        <div class="nb-3">
+            <label for="télephone" class="form-label">Numéro de téléphone</label>
+            <input type="number" class="form-control" id="télephone" name="télephone" value="{{ entity.télephone }}"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary" name="submit">
+            {% if entity %}
+                Mettre à jour
+            {% else %}
+                Ajouter
+            {% endif %}
+        </button>
+    </form>
 {% endblock %}

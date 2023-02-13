@@ -36,6 +36,25 @@ class ProductController extends AbstractResourceController
         );
     }
 
+    public function adminShow($id)
+    {
+        $entity = $this->repository->find($id);
+
+        $editUrl = $this->url('product#edit', [ 'id' => $id ]);
+        $deleteUrl = $this->url('product#delete', [ 'id' => $id ]);
+        $listUrl = $this->url('product#adminList');
+
+        $this->render(
+            'admin/product/detail.html.twig',
+            [
+                'entity' => $entity,
+                'listUrl' => $listUrl,
+                'editUrl' => $editUrl,
+                'deleteUrl' => $deleteUrl
+            ]
+        );
+    }
+
     public function showList()
     {
         $entities = $this->repository->findAll();
@@ -53,6 +72,30 @@ class ProductController extends AbstractResourceController
         $this->render(
             'product/list.html.twig',
             [
+                'entities' => $entities
+            ]
+        );
+    }
+
+    public function adminList()
+    {
+        $entities = $this->repository->findAll();
+
+        $entities = array_map(
+            function ($entity) {
+                $entity['show'] = $this->url('product#adminShow', ['id' => $entity['id']]);
+                $entity['edit'] = $this->url('product#edit', ['id' => $entity['id']]);
+                $entity['delete'] = $this->url('product#delete', ['id' => $entity['id']]);
+                return $entity;
+            },
+            $entities
+        );
+
+        $addUrl = $this->url('product#create');
+
+        $this->render(
+            'admin/product/list.html.twig',
+            [
                 'entities' => $entities,
                 'addUrl' => $addUrl
             ]
@@ -69,12 +112,12 @@ class ProductController extends AbstractResourceController
             # Enregistrement des données en base
             $resultId = $this->repository->update(isset($id) ? $id : null, $_POST);
             # Génération de l'URL pour accéder au produit créé ou modifié
-            $url = $this->url('product#show', ['id' => $resultId]);
+            $url = $this->url('product#adminShow', ['id' => $resultId]);
             # Redirection vers la page du produit
             $this->redirect($url);
         }
 
-        $listUrl = $this->url('product#showList');
+        $listUrl = $this->url('product#adminList');
 
         $categoryRepository = new CategoryRepository();
         $categories = $categoryRepository->findAll();
@@ -85,7 +128,7 @@ class ProductController extends AbstractResourceController
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
             $entity = $this->repository->find($id);
-            $this->render('product/form.html.twig',[
+            $this->render('admin/product/form.html.twig',[
                 'entity' => $entity,
                 'categories' => $categories,
                 'types' => $types,
@@ -93,7 +136,7 @@ class ProductController extends AbstractResourceController
             ]);
         }
         else { // CREATE
-            $this->render('product/form.html.twig',[
+            $this->render('admin/product/form.html.twig',[
                 'categories' => $categories,
                 'types' => $types,
                 'listUrl' => $listUrl

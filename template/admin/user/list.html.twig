@@ -1,4 +1,4 @@
-{% extends "adminLayout.html.twig" %}
+{% extends "shared/layout.html.twig" %}
 
 {% block title %}
     Administration des utilisateurs
@@ -11,7 +11,7 @@
         </div>
         <div>
             <a
-                    href="/?page=adminUserAdd"
+                    href="{{ addUrl }}"
                     class="btn btn-success"
             >
                 <i class="fa-sharp fa-solid fa-plus"></i>
@@ -32,41 +32,41 @@
             </tr>
             </thead>
             <tbody>
-            {% for user in users %}
+            {% for entity in entities %}
                 <tr>
-                    <td>{{ user.id }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.firstname }}</td>
-                    <td>{{ user.lastname }}</td>
-                    <td>{{ user.role }}</td>
+                    <td>{{ entity.id }}</td>
+                    <td>{{ entity.mail }}</td>
+                    <td>{{ entity.prénom }}</td>
+                    <td>{{ entity.nom }}</td>
+                    <td>{{ entity.role }}</td>
                     <td>
                         <a
                                 class="btn btn-warning"
-                                href="/?page=adminUserToggleActive&user={{ user.id }}"
+                                href="{{ entity.toggleActive }}"
                         >
-                            {% if user.active %}
-                                <i class="fa-sharp fa-solid fa-user"></i> Actif
+                            {% if entity.active %}
+                                <i class="fa-sharp fa-solid fa-user"></i>   Actif
                             {% else %}
-                                <i class="fa-sharp fa-solid fa-user-slash"></i> Désactivé
+                                <i class="fa-sharp fa-solid fa-user-slash"></i>   Désactivé
                             {% endif %}
                         </a>
                     </td>
                     <td>
                         <a
                                 class="btn btn-success"
-                                href="/?page=adminUserShow&user={{ user.id }}"
+                                href="{{ entity.show }}"
                         >
                             <i class="fa-sharp fa-solid fa-eye"></i>
                         </a>
                         <a
                                 class="btn btn-primary"
-                                href="/?page=adminUserEdit&user={{ user.id }}"
+                                href="{{ entity.edit }}"
                         >
                             <i class="fa-sharp fa-solid fa-pen"></i>
                         </a>
                         <a
                                 class="btn btn-danger"
-                                href="/?page=adminUserDelete&user={{ user.id }}"
+                                href="{{ entity.delete }}"
                         >
                             <i class="fa-sharp fa-solid fa-trash"></i>
                         </a>

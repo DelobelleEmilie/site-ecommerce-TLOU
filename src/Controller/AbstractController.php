@@ -31,7 +31,6 @@ abstract class AbstractController {
 
         $navigation = [];
 
-        $navigation['Catégories'] = $this->url('category#showList');
         $navigation['Produits'] = $this->url('product#showList');
         $navigation['Goodies'] =
         [
@@ -45,15 +44,25 @@ abstract class AbstractController {
             ['label' => 'Jeux PS5', 'url' => $this->url('jeux#showList', ['category', 'ps5'])],
         ];
         $navigation['Contact'] = $this->url('contact#show');
-        # Ajout de la navigation à tous les pages
-        $params = array_merge($params, ['navigation' => $navigation]);
 
         $user = $this->authManager->getUser();
+        $roles = $this->authManager->getRoles();
 
-        if (isset($_SESSION['user']))
+        if (in_array('ROLE_ADMIN', $roles))
         {
-            $params['user'] = $_SESSION['user'];
+            $navigation['Administration'] = [
+                ['label' => 'Produits', 'url' => $this->url('product#adminList')],
+                ['label' => 'Catégories', 'url' => $this->url('category#adminList')],
+                ['label' => 'Utilisateurs', 'url' => $this->url('user#adminList')],
+            ];
         }
+
+        # Ajout de la navigation à tous les pages
+        $params = array_merge($params, ['navigation' => $navigation]);
+        $params = array_merge($params, ['user' => $user]);
+
+        $params = array_merge($params, ['cartUrl' => $this->url('cart#show')]);
+        $params = array_merge($params, ['logoutUrl' => $this->url('user#logout')]);
 
         try {
             echo $this->twig->render(

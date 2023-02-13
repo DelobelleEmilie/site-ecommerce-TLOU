@@ -18,7 +18,7 @@ class UserRepository extends AbstractRepository
 
     public function findAll()
     {
-        $query = $this->DBConnexion->prepare("SELECT id,mail,date_naissance,prénom,nom,mot_passe,role,télephone FROM shop_user");
+        $query = $this->DBConnexion->prepare("SELECT id,mail,date_naissance,prénom,nom,mot_passe,role,télephone, active FROM shop_user");
         $query->execute();
         return $query->fetchAll();
     }
@@ -125,4 +125,20 @@ public function verify($email, $password)
     #sinon sa retour donnée null
     return null;
 }
+
+    public function toggleActive($id)
+    {
+        $query = $this->DBConnexion->prepare("SELECT active FROM shop_user WHERE id = :id");
+        $query->execute([
+            'id' => $id
+        ]);
+        $active = $query->fetch()['active'];
+
+        $query = $this->DBConnexion->prepare("UPDATE shop_user SET active = :active WHERE id = :id");
+        $query->execute([
+            'id' => $id,
+            'active' => $active == 0 ? 1 : 0
+        ]);
+        return $query->rowCount() > 0;
+    }
 }

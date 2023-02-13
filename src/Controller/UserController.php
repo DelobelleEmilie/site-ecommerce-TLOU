@@ -224,6 +224,29 @@ class UserController extends AbstractResourceController
         );
     }
 
+    public function adminShow($id)
+    {
+        $entity = $this->repository->find($id);
+
+        #demander au router de générer une url
+        #demandes l'URL pour modifier et supprimer le type
+        $editUrl = $this->url('user#edit', [ 'id' => $id ]);
+        $deleteUrl = $this->url('user#delete', [ 'id' => $id ]);
+        $listUrl = $this->url('user#adminList');
+
+        #afficher du twig
+        #on lui envoie le type et les URL de modification et suppression en paramètre
+        $this->render(
+            'admin/user/detail.html.twig',
+            [
+                'entity' => $entity,
+                'listUrl' => $listUrl,
+                'editUrl' => $editUrl,
+                'deleteUrl' => $deleteUrl
+            ]
+        );
+    }
+
     public function showList()
     {
         #on récupère toutes les catégories depuis la base de données
@@ -251,6 +274,36 @@ class UserController extends AbstractResourceController
         );
     }
 
+    public function adminList()
+    {
+        #on récupère toutes les catégories depuis la base de données
+        $entities = $this->repository->findAll();
+
+        #array_map, c'est une function qui prend 2 paramètres
+        $entities = array_map(
+        #tableau qui ajouter un lien (link) à ma catégorie
+            function ($entity) {
+                $entity['show'] = $this->url('user#adminShow', ['id' => $entity['id']]);
+                $entity['edit'] = $this->url('user#edit', ['id' => $entity['id']]);
+                $entity['delete'] = $this->url('user#delete', ['id' => $entity['id']]);
+                $entity['toggleActive'] = $this->url('user#toggleActive', ['id' => $entity['id']]);
+                return $entity;
+            },
+            $entities
+        );
+
+        $addUrl = $this->url('user#create');
+
+        #envoie toutes les catégories à twig
+        $this->render(
+            'admin/user/list.html.twig',
+            [
+                'entities' => $entities,
+                'addUrl' => $addUrl
+            ]
+        );
+    }
+
     public function edit($id = null)
     {
         // On a des données du formulaire, on enregistre en base
@@ -263,7 +316,11 @@ class UserController extends AbstractResourceController
             $this->redirect($url);
         }
 
-        $listUrl = $this->url('user#showList');
+        $listUrl = $this->url('user#adminList');
+
+        $roles = [
+
+        ];
 
         // Si pas de données du formulaire, on affiche le formulaire
         if(isset($id)) { // UPDATE
@@ -274,7 +331,7 @@ class UserController extends AbstractResourceController
             ]);
         }
         else { // CREATE
-            $this->render('user/form.html.twig',[
+            $this->render('admin/user/form.html.twig',[
                 'listUrl' => $listUrl
             ]);
         }
@@ -287,7 +344,18 @@ class UserController extends AbstractResourceController
 
         #sert à rediriger vers /category
         #génère l'URL
-        $listUrl = $this->url('user#showList');
+        $listUrl = $this->url('user#adminList');
+        #redirige l'url
+        $this->redirect($listUrl);
+    }
+
+    public function toggleActive($id)
+    {
+        $this->repository->toggleActive($id);
+
+        #sert à rediriger vers /category
+        #génère l'URL
+        $listUrl = $this->url('user#adminList');
         #redirige l'url
         $this->redirect($listUrl);
     }

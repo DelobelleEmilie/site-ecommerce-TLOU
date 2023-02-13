@@ -23,6 +23,20 @@ class AuthenticationManager
         return $this->user;
     }
 
+    public function getRoles()
+    {
+        if (!isset($this->user)) { return []; }
+        $userRoles = $this->user['role'];
+        if ($userRoles[0] === '[') {
+            $userRoles = json_decode($userRoles);
+        }
+        else {
+            $userRoles = [$userRoles];
+        }
+        $userRoles[] = 'ROLE_USER';
+        return $userRoles;
+    }
+
     /**
      * @param mixed|null $user
      */
@@ -46,14 +60,7 @@ class AuthenticationManager
         if (count($roles) === 0) { return true; }
         if (!isset($this->user)) { return false; }
 
-        $userRoles = $this->user['role'];
-        if ($userRoles[0] === '[') {
-            $userRoles = json_decode($userRoles);
-        }
-        else {
-            $userRoles = [$userRoles];
-        }
-        $userRoles[] = 'ROLE_USER';
+        $userRoles = $this->getRoles();
 
         foreach ($userRoles as $userRole) {
             if (in_array($userRole, $roles)){
